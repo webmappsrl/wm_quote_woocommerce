@@ -365,14 +365,18 @@ function wh_cartOrderItemsbyNewest() {
 add_action( 'woocommerce_review_order_before_submit', 'bbloomer_add_checkout_privacy_policy', 9 );
     
 function bbloomer_add_checkout_privacy_policy() {
-   
+	if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
+		$language = ICL_LANGUAGE_CODE;
+	} else {
+		$language = 'it';
+	}
 	woocommerce_form_field( 'newsletter_acceptance', array(
 	'type'          => 'checkbox',
 	'class'         => array('form-row privacy'),
 	'label_class'   => array('woocommerce-form__label woocommerce-form__label-for-checkbox checkbox'),
 	'input_class'   => array('woocommerce-form__input woocommerce-form__input-checkbox input-checkbox'),
 	'required'      => false,
-	'label'         => 'I agree to receive the newsletter',
+	'label'         => __('I agree to receive the newsletter' ,'wm-child-verdenatura'),
 	)); 
 
 	woocommerce_form_field( 'privacy_policy', array(
@@ -381,7 +385,7 @@ function bbloomer_add_checkout_privacy_policy() {
 	'label_class'   => array('woocommerce-form__label woocommerce-form__label-for-checkbox checkbox'),
 	'input_class'   => array('woocommerce-form__input woocommerce-form__input-checkbox input-checkbox'),
 	'required'      => true,
-	'label'         => 'I\'ve read and accept the <a href="/privacy/?lang=en">Privacy Policy</a>',
+	'label'         => sprintf(__('I\'ve read and accept the <a href="/privacy/?lang=%s">Privacy Policy</a>' ,'wm-child-verdenatura'),$language),
 	)); 
 
 	woocommerce_form_field( 'terms_conditions', array(
@@ -390,7 +394,7 @@ function bbloomer_add_checkout_privacy_policy() {
 	'label_class'   => array('woocommerce-form__label woocommerce-form__label-for-checkbox checkbox'),
 	'input_class'   => array('woocommerce-form__input woocommerce-form__input-checkbox input-checkbox'),
 	'required'      => true,
-	'label'         => 'I\'ve read and accept the <a href="/general-terms-and-conditions-of-travel-packages-sale-contract/?lang=en">terms & conditions</a>',
+	'label'         => sprintf(__('I\'ve read and accept the <a href="/privacy/?lang=%s">terms & conditions</a>','wm-child-verdenatura'),$language),
 	)); 
    
 }
