@@ -11,4 +11,5 @@ include_once ('routes/route.php');
 include_once ('api_cache/on_save.php');
 include_once ('wmcli/WebMapp_wm-generate-route-api-cache.php');
 include_once ('woocommerce/woocommerce.php');
+include_once ('woocommerce/preventivi-json.php');
 include_once ('route-acf-register/route-acf-register.php');

@@ -1,4 +1,5 @@
 <?php
+//Child Theme Functions File
 
 // customize add to cart url with multipe variables and quantities ********************************************/
 // Fire before the WC_Form_Handler::add_to_cart_action callback.
@@ -138,7 +139,7 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 
 		function custom_add_to_cart_redirect() { 
 			if( isset( $_REQUEST['add-to-cart'] ) && $_GET['lang'] == 'en') {
-			return 'https://vnpreprod.webmapp.it/your-order/?lang=en'; 
+			return 'https://cyclando.com/your-order/?lang=en'; 
 			}
 		}
 		add_filter( 'woocommerce_add_to_cart_redirect', 'custom_add_to_cart_redirect' );
@@ -191,7 +192,7 @@ function woocommerce_custom_surcharge() {
 
     if( WC()->session->__isset('wp_quote_insurance') ) {
        $insurance = WC()->session->get('wp_quote_insurance');
-       WC()->cart->add_fee( __('Insurance' ,'wm-child-verdenatura'), $insurance);
+       WC()->cart->add_fee( __('Cancellation insurance' ,'wm-child-verdenatura'), $insurance);
     }
 	
 }
@@ -316,13 +317,13 @@ add_filter( 'woocommerce_cart_totals_coupon_html', 'change_remove', 10, 3);
 
 
 // adds the deposit amount to cart page after total number
-add_action( 'woocommerce_cart_totals_after_order_total','show_deposit_amount' );
+add_action( 'woocommerce_cart_totals_before_order_total','show_deposit_amount' );
 function show_deposit_amount() {
-	$deposit_to_pay = WC()->cart->total * 0.25 ;
+	$deposit_to_pay = WC()->session->get('vn_deposit_amount') ;
 	$deposit_to_pay_formated = number_format($deposit_to_pay, 2);
 	?>
 	<tr class="order_deposit">
-		<th><?php _e( '25% Deposit', 'woocommerce' ); ?></th>
+		<th><?php _e( '25% Deposit + Cancellation insurance', 'woocommerce' ); ?></th>
 		<td data-title="<?php esc_attr_e( '25% Deposit', 'woocommerce' ); ?>"><?php echo $deposit_to_pay_formated  ?>€</td>
 	</tr><?php
     
@@ -380,7 +381,7 @@ function bbloomer_add_checkout_privacy_policy() {
 	'label_class'   => array('woocommerce-form__label woocommerce-form__label-for-checkbox checkbox'),
 	'input_class'   => array('woocommerce-form__input woocommerce-form__input-checkbox input-checkbox'),
 	'required'      => true,
-	'label'         => 'I\'ve read and accept the <a href="/privacy-policy">Privacy Policy</a>',
+	'label'         => 'I\'ve read and accept the <a href="/privacy/?lang=en">Privacy Policy</a>',
 	)); 
 
 	woocommerce_form_field( 'terms_conditions', array(
@@ -389,7 +390,7 @@ function bbloomer_add_checkout_privacy_policy() {
 	'label_class'   => array('woocommerce-form__label woocommerce-form__label-for-checkbox checkbox'),
 	'input_class'   => array('woocommerce-form__input woocommerce-form__input-checkbox input-checkbox'),
 	'required'      => true,
-	'label'         => 'I\'ve read and accept the <a href="/terms-conditions">terms & conditions</a>',
+	'label'         => 'I\'ve read and accept the <a href="/general-terms-and-conditions-of-travel-packages-sale-contract/?lang=en">terms & conditions</a>',
 	)); 
    
 }
@@ -464,6 +465,9 @@ function vn_order_admin_metabox_callback( $post ) {
 	$club_name = '';
 	$place = '';
 	$place_s = '';
+	$routeid = '';
+	$routCode = '';
+	$routePermalink = '';
 	foreach ( $post as $info) {
 		$description = $info->post_excerpt;
 	}
@@ -473,6 +477,11 @@ function vn_order_admin_metabox_callback( $post ) {
     <?php
     
     foreach ($desc as $val => $key){
+		if ($val == 'routeId') { 
+			$routeid = $key;
+			$routCode = get_field('n7webmapp_route_cod',$routeid);
+			$routePermalink = get_permalink($routeid);
+		} 
 		if ($val == 'boat_trip') { //check if the route is in boat or not
 			$place = __('cabin','wm-child-verdenatura'); 
 			$place_s = __('cabins','wm-child-verdenatura'); 
@@ -501,7 +510,8 @@ function vn_order_admin_metabox_callback( $post ) {
             <?php 
                 echo '<div class="tour-general-info"><p><strong>';
                 echo __('Departure date:' ,'wm-child-verdenatura').' </strong>';
-                echo $departure_date.'</p>';
+				echo $departure_date.'</p>';
+				echo '<strong><p>'.__('Route code:','wm-child-verdenatura').'</strong> <a target="_blank" href="'.$routePermalink.'">'.$routCode.'</p></a>';
             if ( $nightsBefore ) {
                 echo '<p><strong>';
                 echo __('Nights Before:' ,'wm-child-verdenatura').' </strong>';
@@ -509,7 +519,7 @@ function vn_order_admin_metabox_callback( $post ) {
             }
             if ( $insurance_name ) { 
                 echo '<p><strong>';
-                echo __('Insurance:' ,'wm-child-verdenatura').' </strong>';
+                echo __('Cancellation insurance:' ,'wm-child-verdenatura').' </strong>';
                 echo $insurance_name.' ('.$insurance_price.'%)</p>';
             }
             if ( $club_name ) {
@@ -540,6 +550,7 @@ function vn_order_admin_metabox_callback( $post ) {
                         $firsName = $pax['firstName'];
                         $lastName = $pax['lastName'];
                         $birth_date = $pax['date'];
+                        $person_height = $pax['height'];
                         $price = $pax['price'];
                         $rentBike = '';
                         $babyseat = '';
@@ -562,6 +573,7 @@ function vn_order_admin_metabox_callback( $post ) {
                         <td>
 							<?php echo $firsName.' '.$lastName; ?>
 							<?php if ( $birth_date ) { echo '<br>'.date("Y-m-d", strtotime($birth_date)); } ?>
+							<?php if ( $person_height ) { echo '<br>Altezza: '.$person_height.'cm'; } ?>
 						</td>
                         
                         <?php
@@ -673,24 +685,47 @@ function vn_order_admin_metabox_callback( $post ) {
 
 add_action( 'woocommerce_email_before_order_table', 'ts_email_before_order_table', 10, 4 );
 function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $email ) {
-	$coupon = $order->get_used_coupons();
-	$coupon_name = $coupon['0'];
-	$post = get_posts( array( 
-		'name' => $coupon_name, 
-		'post_type' => 'shop_coupon'
-	) );
+	// $coupon = $order->get_used_coupons();
+	// $coupon_name = $coupon['0'];
+	
+	// $post = get_posts( array( 
+	// 	'name' => $coupon_name, 
+	// 	'post_type' => 'shop_coupon'
+	// ) );
+	$object = WC()->cart;
+	if ($object instanceof WC_Cart )
+		$coupons = $object->get_coupons();
+	else {
+		$coupons_names = $order->get_used_coupons();
+		$coupons = [];
+		foreach( $coupons_names as $code )
+			$coupons[$code] = new WC_Coupon($code);
+		
+	}
+
+    foreach ($coupons as $val ){
+        $json =  $val;
+    }   
+    $json_output = json_decode($json, JSON_PRETTY_PRINT); 
+    $description = $json_output['description'];
+	$desc = json_decode($description, JSON_PRETTY_PRINT);
+	
 	$departure_date = '';
     $nightsBefore = '';
     $insurance_name = '';
 	$club_name = '';
 	$place = '';
     $place_s = '';
+	$routeid = '';
+	$routCode = '';
+	$routePermalink = '';
 
-	foreach ( $post as $info) {
-		$description = $info->post_excerpt;
-	}
-	$desc = json_decode($description, JSON_PRETTY_PRINT);
 	foreach ($desc as $val => $key){
+		if ($val == 'routeId') { 
+			$routeid = $key;
+			$routCode = get_field('n7webmapp_route_cod',$routeid);
+			$routePermalink = get_permalink($routeid);
+		}
 		if ($val == 'boat_trip') { //check if the route is in boat or not
 			$place = __('cabin','wm-child-verdenatura'); 
 			$place_s = __('cabins','wm-child-verdenatura'); 
@@ -723,7 +758,8 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
             <?php 
                 echo '<div class="tour-general-info"><p><strong>';
                 echo __('Departure date:' ,'wm-child-verdenatura').' </strong>';
-                echo $departure_date.'</p>';
+				echo $departure_date.'</p>';
+				echo '<strong>'.__('Route code:','wm-child-verdenatura').'</strong> <a target="_blank" href="'.$routePermalink.'">'.$routCode.'</a>';
             if ( $nightsBefore ) {
                 echo '<p><strong>';
                 echo __('Nights Before:' ,'wm-child-verdenatura').' </strong>';
@@ -731,7 +767,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
             }
             if ( $insurance_name ) { 
                 echo '<p><strong>';
-                echo __('Insurance:' ,'wm-child-verdenatura').' </strong>';
+                echo __('Cancellation insurance:' ,'wm-child-verdenatura').' </strong>';
                 echo $insurance_name.'</p>';
             }
             if ( $club_name ) {
@@ -884,7 +920,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
     ?>
     </div><!-- END rooms composition  --> 
 	<?php if ($club_name) { ?>
-	<div style="margin: 20px 0;font-weight: bold;background-color: #e8e8e8;padding: 10px;"><?php echo sprintf(__('Remember to send to <a href="mailto:info@verde-natura.it">info@verde-natura.it</a> the photocopy of the %s association card that gives you the right to the discount' ,'wm-child-verdenatura'),$club_name); ?></div>
+	<div style="margin: 20px 0;font-weight: bold;background-color: #e8e8e8;padding: 10px;"><?php echo sprintf(__('Remember to send to <a href="mailto:info@cyclando.com">info@cyclando.com</a> the photocopy of the %s association card that gives you the right to the discount' ,'wm-child-verdenatura'),$club_name); ?></div>
     <?php
 	}
 }
@@ -908,12 +944,13 @@ function custom_cart_items_prices( $cart ) {
     $description = $json_output['description'];
     $desc = json_decode($description, JSON_PRETTY_PRINT);
 
-	foreach ( $post as $info) {
-		$description = $info->post_excerpt;
-	}
+	// foreach ( $post as $info) {
+	// 	$description = $info->post_excerpt;
+	// }
 
 	$desc = json_decode($description, JSON_PRETTY_PRINT);
 	$kid1_max_range = '';
+	$kid1_min_range = '';
 	$kid2_max_range = '';
 	$kid3_max_range = '';
 	$kid4_max_range = '';
@@ -935,6 +972,11 @@ function custom_cart_items_prices( $cart ) {
         }
 		if ($val == 'hotel') {
 			$kid1_max_range = $key['kidTiers'][1]['maxAge'];
+			if ($key['kidTiers'][1]['minAge']) {
+				$kid1_min_range = $key['kidTiers'][1]['minAge'];
+			} else {
+				$kid1_min_range = 0;
+			}
 			$kid2_max_range = $key['kidTiers'][2]['maxAge'];
 			$kid3_max_range = $key['kidTiers'][3]['maxAge'];
 			$kid4_max_range = $key['kid4']['maxAge'];
@@ -971,7 +1013,7 @@ function custom_cart_items_prices( $cart ) {
 			$new_name = __('Basic price in 3rd bed adult' ,'wm-child-verdenatura');
 		}
 		elseif ( preg_match("/kid1_/",$original_last)){
-			$new_name = sprintf(__('3rd/4th bed child price 0/%s yo' ,'wm-child-verdenatura'),$kid1_max_range);
+			$new_name = sprintf(__('3rd/4th bed child price %s/%s yo' ,'wm-child-verdenatura'),$kid1_min_range,$kid1_max_range);
 		}
 		elseif ( preg_match("/kid2_/",$original_last)){
 			$new_name = sprintf(__('3rd/4th bed child price %d/%s yo' ,'wm-child-verdenatura'), $kid1_max_range+1, $kid2_max_range);
@@ -986,7 +1028,7 @@ function custom_cart_items_prices( $cart ) {
 			$new_name = __('Supplement for half board' ,'wm-child-verdenatura');
 		}
 		elseif ( $original_last == 'halfboard_kid1'){
-			$new_name = sprintf(__('Supplement for half board child 0/%s yo' ,'wm-child-verdenatura'),$kid1_max_range);
+			$new_name = sprintf(__('Supplement for half board child %s/%s yo' ,'wm-child-verdenatura'),$kid1_min_range,$kid1_max_range);
 		}
 		elseif ( $original_last == 'halfboard_kid2'){
 			$new_name = sprintf(__('Supplement for half board child %d/%s yo' ,'wm-child-verdenatura'),$kid1_max_range+1, $kid2_max_range);
@@ -1004,7 +1046,7 @@ function custom_cart_items_prices( $cart ) {
 			$new_name = sprintf(__('Extra night in %s (extra bed)' ,'wm-child-verdenatura'),$from);
 		}
 		elseif ( $original_last == 'nightsBefore_kid1'){
-			$new_name = sprintf(__('Extra night in %s (child 0/%s yo)' ,'wm-child-verdenatura'),$from,$kid1_max_range);
+			$new_name = sprintf(__('Extra night in %s (child %s/%s yo)' ,'wm-child-verdenatura'),$from,$kid1_min_range,$kid1_max_range);
 		}
 		elseif ( $original_last == 'nightsBefore_kid2'){
 			$new_name = sprintf(__('Extra night in %s (child %s/%s yo)' ,'wm-child-verdenatura'),$from,$kid1_max_range+1,$kid2_max_range);
@@ -1025,7 +1067,7 @@ function custom_cart_items_prices( $cart ) {
 			$new_name = sprintf(__('Extra night in %s (extra bed)' ,'wm-child-verdenatura'),$to);
 		}
 		elseif ( $original_last == 'nightsAfter_kid1'){
-			$new_name = sprintf(__('Extra night in %s (child 0/%s yo)' ,'wm-child-verdenatura'),$to,$kid1_max_range);
+			$new_name = sprintf(__('Extra night in %s (child %s/%s yo)' ,'wm-child-verdenatura'),$to,$kid1_min_range,$kid1_max_range);
 		}
 		elseif ( $original_last == 'nightsAfter_kid2'){
 			$new_name = sprintf(__('Extra night in %s (child %s/%s yo)' ,'wm-child-verdenatura'),$to,$kid1_max_range+1,$kid2_max_range);
@@ -1128,3 +1170,46 @@ function product_type_selector_filter_callback() {
     <?php
     endif;
 }
+
+// add return to form preventivi (calcolatore) button on cart page
+add_action('woocommerce_proceed_to_checkout','add_back_to_form_quotes');
+function add_back_to_form_quotes(){
+	if (isset($_GET['lang'])){
+		$page_langauge = $_GET['lang'];
+	} else {
+		$page_langauge = 'it';
+	}
+	$coupon_id = WC()->cart->get_coupons();
+	$coupon_ids_applied = WC()->cart->get_applied_coupons();
+	$coupon_id_applied = wc_get_coupon_id_by_code($coupon_ids_applied[0]);
+	
+	$route_id = '';
+    foreach ($coupon_id as $val ){
+		$json =  $val;
+	}  
+    $json_output = json_decode($json, JSON_PRETTY_PRINT); 
+    $description = $json_output['description'];
+    $desc = json_decode($description, JSON_PRETTY_PRINT);
+    foreach ($desc as $val => $key){
+        if ($val == 'routeId') { //check if the route is in boat or not
+			$route_id = $key;
+		} 
+	}
+	?>
+	<div class="wc-proceed-to-checkout">
+		
+		<a id="modifica-ordine" href="http://quote.cyclando.com/#/<?php echo $route_id;?>/<?php echo $coupon_id_applied;?>?lang=<?php echo $page_langauge; ?>" class="checkout-button button alt wc-forward">
+			<?php echo __('Modify your quote', 'wm-child-verdenatura') ?></a>
+	</div>
+	<?php
+}
+
+// add ID to proceed to checkout in cart page 
+function woocommerce_button_proceed_to_checkout() {
+	$checkout_url = WC()->cart->get_checkout_url(); ?>
+	<a id="concludi-ordine" href="<?php echo esc_url( wc_get_checkout_url() );?>" class="checkout-button button alt wc-forward">
+	<?php esc_html_e( 'Proceed to checkout', 'woocommerce' ); ?>
+	</a>
+	<?php
+}
+
