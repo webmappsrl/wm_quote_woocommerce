@@ -1145,6 +1145,9 @@ function custom_cart_items_prices( $cart ) {
 		elseif ( $original_last == 'extra_differentdepartureday'){
 			$new_name = $original_desc;
 		}
+		elseif ( preg_match("/extra_/",$original_last)){
+			$new_name = $original_desc;
+		}
 		elseif ( $original_last == 'helmet'){
 			$new_name = __('Supplement for adult helmet rental' ,'wm-child-verdenatura');
 		} else {
