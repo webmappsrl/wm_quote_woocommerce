@@ -14,7 +14,8 @@ function preventivi_json_to_text(){
     $to = '';
     $discountText = '';
     $routeid = '';
-	$routCode = '';
+    $routCode = '';
+    $routName = '';
 	$routePermalink = '';
     $coupon_id = WC()->cart->get_coupons();
     foreach ($coupon_id as $val ){
@@ -26,7 +27,8 @@ function preventivi_json_to_text(){
     foreach ($desc as $val => $key){
         if ($val == 'routeId') { 
 			$routeid = $key;
-			$routCode = get_field('n7webmapp_route_cod',$routeid);
+			// $routCode = get_field('n7webmapp_route_cod',$routeid);
+			$routName = get_the_title($routeid);
 			$routePermalink = get_permalink($routeid);
 		}
         if ($val == 'boat_trip') { //check if the route is in boat or not
@@ -84,7 +86,7 @@ function preventivi_json_to_text(){
                 echo '<div class="tour-general-info"><p><strong>';
                 echo __('Departure date:' ,'wm-child-verdenatura').' </strong>';
                 echo $departure_date.'</p>';
-				echo '<strong><p>'.__('Route code:','wm-child-verdenatura').'</strong> <a target="_blank" href="'.$routePermalink.'">'.$routCode.'</p></a>';
+				echo '<strong><p>'.__('Route name:','wm-child-verdenatura').'</strong> <a target="_blank" href="'.$routePermalink.'">'.$routName.'</p></a>';
             if ( $nightsBefore ) {
                 echo '<p><strong>';
                 echo __('Nights Before:' ,'wm-child-verdenatura').' </strong>';

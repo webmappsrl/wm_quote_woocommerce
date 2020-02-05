@@ -471,6 +471,7 @@ function vn_order_admin_metabox_callback( $post ) {
 	$place_s = '';
 	$routeid = '';
 	$routCode = '';
+	$routName = '';
 	$routePermalink = '';
 	foreach ( $post as $info) {
 		$description = $info->post_excerpt;
@@ -483,7 +484,8 @@ function vn_order_admin_metabox_callback( $post ) {
     foreach ($desc as $val => $key){
 		if ($val == 'routeId') { 
 			$routeid = $key;
-			$routCode = get_field('n7webmapp_route_cod',$routeid);
+			// $routCode = get_field('n7webmapp_route_cod',$routeid);
+			$routName = get_the_title($routeid);
 			$routePermalink = get_permalink($routeid);
 		} 
 		if ($val == 'boat_trip') { //check if the route is in boat or not
@@ -515,7 +517,7 @@ function vn_order_admin_metabox_callback( $post ) {
                 echo '<div class="tour-general-info"><p><strong>';
                 echo __('Departure date:' ,'wm-child-verdenatura').' </strong>';
 				echo $departure_date.'</p>';
-				echo '<strong><p>'.__('Route code:','wm-child-verdenatura').'</strong> <a target="_blank" href="'.$routePermalink.'">'.$routCode.'</p></a>';
+				echo '<strong><p>'.__('Route name:','wm-child-verdenatura').'</strong> <a target="_blank" href="'.$routePermalink.'">'.$routName.'</p></a>';
             if ( $nightsBefore ) {
                 echo '<p><strong>';
                 echo __('Nights Before:' ,'wm-child-verdenatura').' </strong>';
@@ -763,7 +765,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
                 echo '<div class="tour-general-info"><p><strong>';
                 echo __('Departure date:' ,'wm-child-verdenatura').' </strong>';
 				echo $departure_date.'</p>';
-				echo '<strong>'.__('Route code:','wm-child-verdenatura').'</strong> <a target="_blank" href="'.$routePermalink.'">'.$routCode.'</a>';
+				echo '<strong>'.__('Route name:','wm-child-verdenatura').'</strong> <a target="_blank" href="'.$routePermalink.'">'.$routName.'</a>';
             if ( $nightsBefore ) {
                 echo '<p><strong>';
                 echo __('Nights Before:' ,'wm-child-verdenatura').' </strong>';
