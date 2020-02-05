@@ -217,7 +217,7 @@ function my_custom_checkout_field_display_admin_order_meta( $order ){
 	foreach ($desc as $val => $key){
         if ($val == 'departureDate') {
 			$date = $key;
-			$departure_date = date("Y-m-d", strtotime($date));
+			$departure_date = date("d-m-Y", strtotime($date));
 		}
 	}
 
@@ -497,7 +497,7 @@ function vn_order_admin_metabox_callback( $post ) {
 		}
         if ($val == 'departureDate') {
             $date = $key;
-            $departure_date = date("Y-m-d", strtotime($date));
+            $departure_date = date("d-m-Y", strtotime($date));
         }
         if ($val == 'nightsBefore') {
             $nightsBefore = $key;
@@ -743,7 +743,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
 		}
 		if ($val == 'departureDate') {
             $date = $key;
-            $departure_date = date("Y-m-d", strtotime($date));
+            $departure_date = date("d-m-Y", strtotime($date));
         }
         if ($val == 'nightsBefore') {
             $nightsBefore = $key;
