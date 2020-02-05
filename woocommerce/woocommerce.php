@@ -724,12 +724,14 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
     $place_s = '';
 	$routeid = '';
 	$routCode = '';
+	$routName = '';
 	$routePermalink = '';
 
 	foreach ($desc as $val => $key){
 		if ($val == 'routeId') { 
 			$routeid = $key;
-			$routCode = get_field('n7webmapp_route_cod',$routeid);
+			// $routCode = get_field('n7webmapp_route_cod',$routeid);
+			$routName = get_the_title($routeid);
 			$routePermalink = get_permalink($routeid);
 		}
 		if ($val == 'boat_trip') { //check if the route is in boat or not
