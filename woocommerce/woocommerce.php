@@ -27,7 +27,8 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 
     if( ! is_admin() && isset($_GET['insurance']) ) {
         $_SESSION['wp_quote_insurance'] = $_GET['insurance'];
-        WC()->session->__unset('wp_quote_insurance');
+		WC()->session->__unset('wp_quote_insurance');
+		WC()->session->__unset('vn_deposit_amount');
     }	
 
 	$add_to_cart = $_REQUEST['add-to-cart'];
@@ -315,19 +316,38 @@ function change_remove ($coupon_html, $coupon, $discount_amount_html) {
 add_filter( 'woocommerce_cart_totals_coupon_html', 'change_remove', 10, 3);
 
 
+/** FIX AMOUNT OF CART **/
+add_filter('woocommerce_deposits_cart_deposit_amount', function($deposit_amount, $cart_total){
+   
+    $deposit_percentage = get_option('wc_deposits_checkout_mode_deposit_amount');
+    $insurance = WC()->session->get('wp_quote_insurance');
+    // var_dump($insurance);
+    if ( $deposit_percentage && $insurance )
+    {
+        $insurance_percentage = $insurance * ($deposit_percentage/100);
+        $deposit_amount = $deposit_amount - $insurance_percentage;
+        $deposit_amount = $deposit_amount + $insurance;
+
+        WC()->session->set('vn_deposit_amount',$deposit_amount);
+    }
+return $deposit_amount;
+
+}, 99 ,2);
 
 // adds the deposit amount to cart page after total number
 add_action( 'woocommerce_cart_totals_before_order_total','show_deposit_amount' );
 function show_deposit_amount() {
 	$deposit_to_pay = WC()->session->get('vn_deposit_amount') ;
 	$deposit_to_pay_formated = number_format($deposit_to_pay, 2);
+	$deposit_amount = WC()->session->get('vn_deposit_amount');
+	if (!empty($deposit_amount) ){
 	?>
 	<tr class="order_deposit">
 		<th><?php _e( '25% Deposit + Cancellation insurance', 'woocommerce' ); ?></th>
 		<td data-title="<?php esc_attr_e( '25% Deposit', 'woocommerce' ); ?>"><?php echo $deposit_to_pay_formated  ?>€</td>
 	</tr><?php
     
-    
+	}
 }
 
 /*** @snippet       Remove Cart Item Link - WooCommerce Cart  */
