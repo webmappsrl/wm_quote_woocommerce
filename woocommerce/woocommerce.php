@@ -1244,3 +1244,14 @@ function woocommerce_button_proceed_to_checkout() {
 	<?php
 }
 
+// add action to woocommerce client email of partial payment and order on hold
+add_action ('woocommerce_email_after_order_table','custom_message_client_emails_onhold_partial');
+function custom_message_client_emails_onhold_partial($order, $sent_to_admin, $plain_text, $email) {
+	$order_status = $order->get_status();
+	if ('pending' == $order_status || 'on-hold' == $order_status || 'partially-paid' == $order_status){
+		?>
+		<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura') ?></h3>
+		<?php
+	}
+
+}
