@@ -1252,12 +1252,14 @@ function custom_message_client_emails_onhold_partial($order, $sent_to_admin, $pl
 		?>
 		<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura'); ?></h3>
 		<?php
-	} elseif ('on-hold' == $order_status ){
+	} 
+	if ('on-hold' == $order_status ){
 		?>
 		<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura'); ?></h3>
 		<?php
 
-	} elseif ('partially-paid' == $order_status) {
+	} 
+	if ('partially-paid' == $order_status) {
 		?>
 		<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura'); ?></h3>
 		<?php
