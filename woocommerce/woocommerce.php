@@ -453,10 +453,10 @@ add_action( 'woocommerce_checkout_process', 'bbloomer_not_approved_privacy' );
    
 function bbloomer_not_approved_privacy() {
     if ( ! (int) isset( $_POST['privacy_policy'] ) ) {
-        wc_add_notice( __( 'Please acknowledge the Privacy Policy' ), 'error' );
+        wc_add_notice( __( 'Please acknowledge the Privacy Policy', 'wm-child-verdenatura' ), 'error' );
     }
     if ( ! (int) isset( $_POST['terms_conditions'] ) ) {
-        wc_add_notice( __( 'Please acknowledge the terms & conditions' ), 'error' );
+        wc_add_notice( __( 'Please acknowledge the terms & conditions', 'wm-child-verdenatura' ), 'error' );
     }
 }
 
@@ -1248,9 +1248,18 @@ function woocommerce_button_proceed_to_checkout() {
 add_action ('woocommerce_email_after_order_table','custom_message_client_emails_onhold_partial');
 function custom_message_client_emails_onhold_partial($order, $sent_to_admin, $plain_text, $email) {
 	$order_status = $order->get_status();
-	if ('pending' == $order_status || 'on-hold' == $order_status || 'partially-paid' == $order_status){
+	if ('pending' == $order_status ){
 		?>
-		<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura') ?></h3>
+		<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura'); ?></h3>
+		<?php
+	} elseif ('on-hold' == $order_status ){
+		?>
+		<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura'); ?></h3>
+		<?php
+
+	} elseif ('partially-paid' == $order_status) {
+		?>
+		<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura'); ?></h3>
 		<?php
 	}
 
