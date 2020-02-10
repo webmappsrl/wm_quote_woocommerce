@@ -1245,13 +1245,13 @@ function woocommerce_button_proceed_to_checkout() {
 }
 
 
-add_action ('woocommerce_email_after_order_table','custom_message_client_emails_onhold_partial',10,1);
-function custom_message_client_emails_onhold_partial($order) {
+add_action ('woocommerce_email_after_order_table','custom_message_client_emails_onhold_partial',10,2);
+function custom_message_client_emails_onhold_partial($order,$sent_to_admin) {
 		$order_status = $order->get_status();
-		echo $order_status;
+		echo $sent_to_admin;
 		if ($order_status == 'on-hold' || $order_status == 'partially-paid'){
 			?>
-			<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura'); print_r($order);?></h3>
+			<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura'); print_r($sent_to_admin);?></h3>
 			<?php
 		}
 }
