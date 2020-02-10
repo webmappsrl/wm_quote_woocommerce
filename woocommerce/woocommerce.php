@@ -1251,7 +1251,7 @@ function custom_message_client_emails_onhold_partial($order,$sent_to_admin) {
 		if ($sent_to_admin == false){
 			if ($order_status == 'on-hold' || $order_status == 'partially-paid'){
 				?>
-				<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura'); print_r($sent_to_admin);?></h3>
+				<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura');?></h3>
 				<?php
 			}
 		}
