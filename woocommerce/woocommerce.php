@@ -1247,7 +1247,11 @@ function woocommerce_button_proceed_to_checkout() {
 
 add_action ('woocommerce_email_after_order_table','custom_message_client_emails_onhold_partial',10,1);
 function custom_message_client_emails_onhold_partial($order) {
-	// $order_status = $order->get_status();
+	$order_status1 = $order->status;
+	$order_status2 = $order['status'];
+		echo $order_status1.'</br>';
+		echo $order_status2.'</br>';
+
 		?>
 		<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura'); print_r($order);?></h3>
 		<?php
