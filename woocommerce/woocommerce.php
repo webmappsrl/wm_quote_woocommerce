@@ -1249,7 +1249,9 @@ add_action ('woocommerce_email_after_order_table','custom_message_client_emails_
 function custom_message_client_emails_onhold_partial($order) {
 		$order_status = $order->get_status();
 		echo $order_status;
-		?>
-		<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura'); print_r($order);?></h3>
-		<?php
+		if ($order_status == 'on-hold' || $order_status == 'partially-paid'){
+			?>
+			<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura'); print_r($order);?></h3>
+			<?php
+		}
 }
