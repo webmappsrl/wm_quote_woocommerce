@@ -1244,7 +1244,7 @@ function woocommerce_button_proceed_to_checkout() {
 	<?php
 }
 
-
+// added custom message to client email
 add_action ('woocommerce_email_after_order_table','custom_message_client_emails_onhold_partial',10,2);
 function custom_message_client_emails_onhold_partial($order,$sent_to_admin) {
 		$order_status = $order->get_status();

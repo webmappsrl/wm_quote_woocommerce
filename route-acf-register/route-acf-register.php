@@ -99,6 +99,13 @@ acf_add_local_field_group(array(
 					'instructions' => 'Inserire ad esempio: Alta Stagione, Bassa Stagione',
 				),
 				array(
+					'key' => 'wm_route_quote_model_season_disactive',
+					'label' => 'Stagione disattiva',
+					'name' => 'season_disactive',
+					'type' => 'true_false',
+					'instructions' => 'Clicca per disattivare questa stagione',
+				),
+				array(
 					'key' => 'wm_route_quote_model_season_dates_periods_repeater',
 					'label' => 'Periodi di partenza',
 					'name' => 'periods',
