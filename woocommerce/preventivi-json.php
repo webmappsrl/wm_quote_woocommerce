@@ -16,7 +16,8 @@ function preventivi_json_to_text(){
     $routeid = '';
     $routCode = '';
     $routName = '';
-	$routePermalink = '';
+    $routePermalink = '';
+    $medical_insurance = true;
     $coupon_id = WC()->cart->get_coupons();
     foreach ($coupon_id as $val ){
         $json =  $val;
@@ -110,6 +111,11 @@ function preventivi_json_to_text(){
             if ( $discountText ) {
                 echo '<p style="color:#7AB400;"><strong>';
                 echo $discountText.' </strong>';
+                echo '</p>';
+            }
+            if ( $medical_insurance ) {
+                echo '<p><strong>';
+                echo __('Medical and Baggage Insurance Included:' ,'wm-child-verdenatura').' </strong>';
                 echo '</p>';
             }
             echo '</div>';
