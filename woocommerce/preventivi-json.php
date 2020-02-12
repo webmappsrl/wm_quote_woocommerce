@@ -115,7 +115,7 @@ function preventivi_json_to_text(){
             }
             if ( $medical_insurance ) {
                 echo '<p><strong>';
-                echo __('Medical and Baggage Insurance Included:' ,'wm-child-verdenatura').' </strong>';
+                echo __('Medical and Baggage Insurance Included' ,'wm-child-verdenatura').' </strong>';
                 echo '</p>';
             }
             echo '</div>';

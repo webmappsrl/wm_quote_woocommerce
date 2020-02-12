@@ -747,7 +747,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
 	$routName = '';
 	$routePermalink = '';
 	$medical_insurance = true;
-	
+
 	foreach ($desc as $val => $key){
 		if ($val == 'routeId') { 
 			$routeid = $key;
@@ -806,7 +806,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
 			}
 			if ( $medical_insurance ) {
                 echo '<p><strong>';
-                echo __('Medical and Baggage Insurance Included:' ,'wm-child-verdenatura').' </strong>';
+                echo __('Medical and Baggage Insurance Included' ,'wm-child-verdenatura').' </strong>';
                 echo '</p>';
             }
                 echo '</div>';
