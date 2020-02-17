@@ -903,19 +903,19 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
                         ?>
                         <td colspan="2"><?php if($rentBike): switch ($rentBike) {
                             case 'bike':
-								echo __('Supplement for bike rental' ,'wm-child-verdenatura');
+								echo __('Supplement for bike rental' ,'wm-child-verdenatura').'<br>';
 								break;
 							case 'eBike':
-								echo __('Supplement for eBike rental' ,'wm-child-verdenatura');
+								echo __('Supplement for eBike rental' ,'wm-child-verdenatura').'<br>';
 								break;
 							case 'kidBike':
-								echo __('Supplement for kidBike' ,'wm-child-verdenatura');
+								echo __('Supplement for kidBike' ,'wm-child-verdenatura').'<br>';
 								break;
 							case 'tandem':
-								echo __('Supplement for tandem rental' ,'wm-child-verdenatura');
+								echo __('Supplement for tandem rental' ,'wm-child-verdenatura').'<br>';
 								break;
 							case 'roadbike':
-                                echo __('Supplement for road bike rental' ,'wm-child-verdenatura');
+                                echo __('Supplement for road bike rental' ,'wm-child-verdenatura').'<br>';
                                 break;
                                 
                         } endif;?>
