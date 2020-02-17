@@ -788,7 +788,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
                 echo '<div class="tour-general-info"><p><strong>';
                 echo __('Departure date:' ,'wm-child-verdenatura').' </strong>';
 				echo $departure_date.'</p>';
-				echo '<strong>'.__('Route name:','wm-child-verdenatura').'</strong> <a target="_blank" href="'.$routePermalink.'">'.$routName.'</a>';
+				echo '<p><strong>'.__('Route name:','wm-child-verdenatura').'</strong> <a target="_blank" href="'.$routePermalink.'">'.$routName.'</a></p>';
             if ( $nightsBefore ) {
                 echo '<p><strong>';
                 echo __('Nights Before:' ,'wm-child-verdenatura').' </strong>';
@@ -1243,11 +1243,18 @@ function add_back_to_form_quotes(){
 
 // add ID to proceed to checkout in cart page 
 function woocommerce_button_proceed_to_checkout() {
-	$checkout_url = WC()->cart->get_checkout_url(); ?>
+	?>
 	<a id="concludi-ordine" href="<?php echo esc_url( wc_get_checkout_url() );?>" class="checkout-button button alt wc-forward">
-	<?php esc_html_e( 'Proceed to checkout', 'woocommerce' ); ?>
+	<?php echo __('Continue', 'wm-child-verdenatura');//esc_html_e( 'Proceed to checkout', 'woocommerce' ); ?>
 	</a>
 	<?php
+}
+
+/* Add to the functions.php file of your theme */
+add_filter( 'woocommerce_order_button_text', 'woo_custom_order_button_text' ); 
+
+function woo_custom_order_button_text() {
+    return __( 'Contact Cyclando', 'wm-child-verdenatura' ); 
 }
 
 // added custom message to client email
