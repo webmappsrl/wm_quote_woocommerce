@@ -819,10 +819,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
 					<tr><th colspan="2" style="padding:0;"><?php $room_number = $val2 + 1; echo sprintf(__('%s number %s' ,'wm-child-verdenatura'),$place, $room_number);?></th></tr>
                     <tr> <!--  table row head  -->
                         <th><?php echo __('Name' ,'wm-child-verdenatura');?></th>
-                        <th><?php echo __('Rent bike' ,'wm-child-verdenatura');?></th>
-                        <th><?php echo __('Bike extras' ,'wm-child-verdenatura');?></th>
-                        <th><?php echo __('Bike Warranty' ,'wm-child-verdenatura');?></th>
-                        <th colspan="2"><?php echo __('Extras' ,'wm-child-verdenatura');?></th>
+                        <th colspan="2"><?php echo __('Services' ,'wm-child-verdenatura');?></th>
                         <th><?php echo __('Share' ,'wm-child-verdenatura');?></th>
                     </tr>
                 </thead> <!-- END table head  -->
@@ -904,7 +901,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
                             }
                         }
                         ?>
-                        <td><?php if($rentBike): switch ($rentBike) {
+                        <td colspan="2"><?php if($rentBike): switch ($rentBike) {
                             case 'bike':
 								echo __('Supplement for bike rental' ,'wm-child-verdenatura');
 								break;
@@ -921,15 +918,12 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
                                 echo __('Supplement for road bike rental' ,'wm-child-verdenatura');
                                 break;
                                 
-                        } endif;?></td>
-                        <td>
+                        } endif;?>
                             <?php if($babyseat): echo __('Baby seat' ,'wm-child-verdenatura').'<br>';?><?php endif;?>
                             <?php if($tagalong): echo __('Tag-along' ,'wm-child-verdenatura').'<br>';?><?php endif;?>
                             <?php if($trail): echo __('Trailer' ,'wm-child-verdenatura').'<br>';?><?php endif;?>
                             <?php if($trailgator): echo __('Trailgator' ,'wm-child-verdenatura').'<br>';?><?php endif;?>
-                        </td>
-                        <td><?php if($bikeWarranty):?><?php echo __('Yes' ,'wm-child-verdenatura'); ?><?php endif;?></td>
-                        <td colspan="2">
+                        	<?php if($bikeWarranty):?><?php echo __('Yes' ,'wm-child-verdenatura'); ?><?php endif;?>
                             <?php if($helmet): echo __('Helmet' ,'wm-child-verdenatura').'<br>';?><?php endif;?>
                             <?php if($roadbook): echo __('Roadbook' ,'wm-child-verdenatura').'<br>';?><?php endif;?>
                             <?php if($halfboard): echo __('Halfboard' ,'wm-child-verdenatura').'<br>';?><?php endif;?>
