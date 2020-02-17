@@ -128,7 +128,7 @@ function preventivi_json_to_text(){
                     <tr> <!--  table row head  -->
                         <th><?php $room_number = $val2 + 1; echo sprintf(__('%s number %s' ,'wm-child-verdenatura'),$place, $room_number);?></th>
                         <th><?php echo __('Name' ,'wm-child-verdenatura');?></th>
-                        <th><?php echo __('Services' ,'wm-child-verdenatura');?></th>
+                        <th><?php echo __('Extras' ,'wm-child-verdenatura');?></th>
                         <th><?php echo __('Share' ,'wm-child-verdenatura');?></th>
                     </tr>
                 </thead> <!-- END table head  -->

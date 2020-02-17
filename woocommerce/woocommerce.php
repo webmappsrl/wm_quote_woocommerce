@@ -819,7 +819,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
 					<tr><th colspan="2" style="padding:0;"><?php $room_number = $val2 + 1; echo sprintf(__('%s number %s' ,'wm-child-verdenatura'),$place, $room_number);?></th></tr>
                     <tr> <!--  table row head  -->
                         <th><?php echo __('Name' ,'wm-child-verdenatura');?></th>
-                        <th colspan="2"><?php echo __('Services' ,'wm-child-verdenatura');?></th>
+                        <th colspan="2"><?php echo __('Extras' ,'wm-child-verdenatura');?></th>
                         <th><?php echo __('Share' ,'wm-child-verdenatura');?></th>
                     </tr>
                 </thead> <!-- END table head  -->
