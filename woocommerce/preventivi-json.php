@@ -84,9 +84,9 @@ function preventivi_json_to_text(){
         if ($val == 'rooms') {
             $rooms = $key;?>
             <?php 
-                echo '<div class="tour-general-info"><p id="data-partenza"><strong>';
+                echo '<div class="tour-general-info"><p><strong>';
                 echo __('Departure date:' ,'wm-child-verdenatura').' </strong>';
-                echo $departure_date.'</p>';
+                echo '<span id="data-partenza">'.$departure_date.'</span></p>';
 				echo '<p id="route-name"><strong>'.__('Route name:','wm-child-verdenatura').'</strong> <a target="_blank" href="'.$routePermalink.'">'.$routName.'</a></p>';
             if ( $nightsBefore ) {
                 echo '<p><strong>';
