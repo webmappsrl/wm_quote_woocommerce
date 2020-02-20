@@ -1,0 +1,15 @@
+<wpml-config>
+  <custom-fields>
+      <custom-field action="copy">wm_route_quote_product</custom-field>
+      <custom-field action="copy">wm_route_not_salable</custom-field>
+      <custom-field action="copy">wm_route_in_promotion</custom-field>
+      <custom-field action="copy">wm_route_quote_season_repeater</custom-field>
+      <custom-field action="copy">wm_route_quote_promotion_repeater</custom-field>
+      <custom-field action="copy">wm_route_quote_dates</custom-field>
+      <custom-field action="copy">wm_route_quote_dates_periods_repeater</custom-field>
+      <custom-field action="copy">wm_route_quote_dates_specific_repeater</custom-field>      
+    </custom-fields>
+   
+</wpml-config>
+
+
