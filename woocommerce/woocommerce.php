@@ -1267,7 +1267,7 @@ function custom_message_client_emails_onhold_partial($order,$sent_to_admin) {
 // change deposit send email order to admin
 add_action('woocommerce_email', function($wc_emails){
 
-	$new_order_email = $wc_emails['WC_Email_New_Order'];
+	$new_order_email = $wc_emails->emails['WC_Email_New_Order'];
 	add_action('woocommerce_order_status_draft_to_pending', array($new_order_email,'trigger'));
 
 },99);
