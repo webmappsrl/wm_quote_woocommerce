@@ -777,7 +777,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
         }
 	}
 	?>
-	<div class="rooms-composition"> <!------- rooms composition -- ---->
+	<div style="margin-bottom: 20px;" class="rooms-composition"> <!------- rooms composition -- ---->
 	<h2><?php echo sprintf(__('%s and Travelers\' details: ' ,'wm-child-verdenatura'), $place_s);?></h2>
     <?php
     
