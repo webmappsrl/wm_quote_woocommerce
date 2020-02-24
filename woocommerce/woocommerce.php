@@ -1258,7 +1258,7 @@ function custom_message_client_emails_onhold_partial($order,$sent_to_admin) {
 		if ($sent_to_admin == false){
 			if ($order_status == 'on-hold' || $order_status == 'partially-paid'){
 				?>
-				<h3><?php echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura');?></h3>
+				<h3><?php echo __('To confirm the trip it is necessary to make the payment of the deposit by inserting as reason: Name, date of departure and Order No.', 'wm-child-verdenatura').' ';echo __('The balance is to be paid 30 days before departure', 'wm-child-verdenatura');?></h3>
 				<?php
 			}
 		}
