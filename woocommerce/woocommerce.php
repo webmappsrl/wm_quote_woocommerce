@@ -811,16 +811,16 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
             }
                 echo '</div>';
             ?>
-            <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
+            <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0" border="1" style="border:0px;">
             <?php
             foreach ($rooms as $val2 => $room){
                 ?>
                 <thead> <!--  table head  -->
-					<tr><th colspan="2" style="padding:0;"><?php $room_number = $val2 + 1; echo sprintf(__('%s number %s' ,'wm-child-verdenatura'),$place, $room_number);?></th></tr>
+					<tr><th colspan="2" style="padding:0;border:0px;"><?php $room_number = $val2 + 1; echo sprintf(__('%s number %s' ,'wm-child-verdenatura'),$place, $room_number);?></th></tr>
                     <tr> <!--  table row head  -->
-                        <th><?php echo __('Name' ,'wm-child-verdenatura');?></th>
-                        <th colspan="2"><?php echo __('Extras' ,'wm-child-verdenatura');?></th>
-                        <th><?php echo __('Share' ,'wm-child-verdenatura');?></th>
+                        <th style="border: 1px solid #e5e5e5;"><?php echo __('Name' ,'wm-child-verdenatura');?></th>
+                        <th style="border: 1px solid #e5e5e5;" colspan="2"><?php echo __('Extras' ,'wm-child-verdenatura');?></th>
+                        <th style="border: 1px solid #e5e5e5;"><?php echo __('Share' ,'wm-child-verdenatura');?></th>
                     </tr>
                 </thead> <!-- END table head  -->
                 <tbody>
@@ -846,7 +846,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
 						$shareRoom = '';
                         ?>
                         <tr>
-                        <td><?php echo $firsName.' '.$lastName; ?></td>
+                        <td style="border: 1px solid #e5e5e5;"><?php echo $firsName.' '.$lastName; ?></td>
                         
                         <?php
                         foreach ($pax as $val4 => $extra){
@@ -901,7 +901,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
                             }
                         }
                         ?>
-                        <td colspan="2"><?php if($rentBike): switch ($rentBike) {
+                        <td style="border: 1px solid #e5e5e5;" colspan="2"><?php if($rentBike): switch ($rentBike) {
                             case 'bike':
 								echo __('Supplement for bike rental' ,'wm-child-verdenatura').'<br>';
 								break;
@@ -934,7 +934,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
                             <?php if($boardingtax): echo __('Boarding tax' ,'wm-child-verdenatura').'<br>';?><?php endif;?>
                             <?php if($shareRoom): echo __('Shared room' ,'wm-child-verdenatura').'<br>';?><?php endif;?>
                         </td>
-                        <td><?php echo $price.'€'; ?></td>
+                        <td style="border: 1px solid #e5e5e5;"><?php echo $price.'€'; ?></td>
                         </tr>
                         <?php
                     }
