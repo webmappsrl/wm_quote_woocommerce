@@ -1229,7 +1229,7 @@ function add_back_to_form_quotes(){
 	?>
 	<div class="wc-proceed-to-checkout">
 		
-		<a id="modifica-ordine" href="http://quote.cyclando.com/#/<?php echo $route_id;?>/<?php echo $coupon_id_applied;?>?lang=<?php echo $page_langauge; ?>" class="checkout-button button alt wc-forward">
+		<a id="modifica-ordine" href="http://cyclando.com/quote/#/<?php echo $route_id;?>/<?php echo $coupon_id_applied;?>?lang=<?php echo $page_langauge; ?>" class="checkout-button button alt wc-forward">
 			<?php echo __('Modify your quote', 'wm-child-verdenatura') ?></a>
 	</div>
 	<?php
