@@ -193,7 +193,7 @@ function woocommerce_custom_surcharge() {
 
     if( WC()->session->__isset('wp_quote_insurance') ) {
 	   	$insurance = WC()->session->get('wp_quote_insurance');
-	   	if ($insurance){
+	   	if (isset($insurance)){
 			WC()->cart->add_fee( __('Cancellation insurance' ,'wm-child-verdenatura'), $insurance);
 		}
     }
