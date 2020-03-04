@@ -342,10 +342,18 @@ function show_deposit_amount() {
 	$deposit_to_pay = WC()->session->get('vn_deposit_amount') ;
 	$deposit_to_pay_formated = number_format($deposit_to_pay, 2);
 	$deposit_amount = WC()->session->get('vn_deposit_amount');
+	$insurance = WC()->session->get('wp_quote_insurance');
 	if (!empty($deposit_amount) ){
 	?>
 	<tr class="order_deposit">
-		<th><?php _e( '25% Deposit + Cancellation insurance', 'woocommerce' ); ?></th>
+		<th>
+			<?php 
+			if (isset($insurance) && $insurance > 0){ 
+				_e( '25% Deposit + Cancellation insurance', 'woocommerce' );
+			} else {
+				_e( '25% Deposit', 'woocommerce' );
+			}?>
+		</th>
 		<td data-title="<?php esc_attr_e( '25% Deposit', 'woocommerce' ); ?>"><?php echo $deposit_to_pay_formated  ?>€</td>
 	</tr><?php
     
