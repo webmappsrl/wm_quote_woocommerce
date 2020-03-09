@@ -1246,15 +1246,13 @@ function add_back_to_form_quotes(){
 }
 
 // add ID to proceed to checkout in cart page 
-function cy_button_proceed_to_checkout() {
+function woocommerce_button_proceed_to_checkout() {
 	?>
 	<a id="concludi-ordine" href="<?php echo esc_url( wc_get_checkout_url() );?>" class="checkout-button button alt wc-forward">
 	<?php echo __('Continue', 'wm-child-verdenatura');//esc_html_e( 'Proceed to checkout', 'woocommerce' ); ?>
 	</a>
 	<?php
 }
-remove_action( 'woocommerce_proceed_to_checkout','woocommerce_button_proceed_to_checkout', 20);
-add_action( 'woocommerce_proceed_to_checkout','cy_button_proceed_to_checkout', 20);
 
 /* Add to the functions.php file of your theme */
 add_filter( 'woocommerce_order_button_text', 'woo_custom_order_button_text' ); 
