@@ -1213,7 +1213,9 @@ function product_type_selector_filter_callback() {
 }
 
 // add return to form preventivi (calcolatore) button on cart page
-add_action('woocommerce_proceed_to_checkout','add_back_to_form_quotes');
+// add ID to proceed to checkout in cart page 
+remove_action( 'woocommerce_proceed_to_checkout','woocommerce_button_proceed_to_checkout', 20);
+add_action('woocommerce_proceed_to_checkout','add_back_to_form_quotes', 20);
 function add_back_to_form_quotes(){
 	if (isset($_GET['lang'])){
 		$page_langauge = $_GET['lang'];
@@ -1237,24 +1239,14 @@ function add_back_to_form_quotes(){
 		} 
 	}
 	?>
-	<div class="wc-proceed-to-checkout">
 		
-		<a id="modifica-ordine" href="http://cyclando.com/quote/#/<?php echo $route_id;?>/<?php echo $coupon_id_applied;?>?lang=<?php echo $page_langauge; ?>" class="checkout-button button alt wc-forward">
-			<?php echo __('Modify your quote', 'wm-child-verdenatura') ?></a>
-	</div>
-	<?php
-}
+		<a id="modifica-ordine" href="http://cyclando.com/quote/#/<?php echo $route_id;?>/<?php echo $coupon_id_applied;?>?lang=<?php echo $page_langauge; ?>" class="checkout-button button alt wc-forward"><?php echo __('Modify your quote', 'wm-child-verdenatura') ?></a>
 
-// add ID to proceed to checkout in cart page 
-function cy_button_proceed_to_checkout() {
-	?>
-	<a id="concludi-ordine" href="<?php echo esc_url( wc_get_checkout_url() );?>" class="checkout-button button alt wc-forward">
-	<?php echo __('Continue', 'wm-child-verdenatura');//esc_html_e( 'Proceed to checkout', 'woocommerce' ); ?>
-	</a>
+		<a id="concludi-ordine" href="<?php echo esc_url( wc_get_checkout_url() );?>" class="checkout-button button alt wc-forward">
+		<?php echo __('Continue', 'wm-child-verdenatura');//esc_html_e( 'Proceed to checkout', 'woocommerce' ); ?>
+		</a>
 	<?php
 }
-remove_action( 'woocommerce_proceed_to_checkout','woocommerce_button_proceed_to_checkout', 20);
-add_action( 'woocommerce_proceed_to_checkout','cy_button_proceed_to_checkout', 20);
 
 /* Add to the functions.php file of your theme */
 add_filter( 'woocommerce_order_button_text', 'woo_custom_order_button_text' ); 
