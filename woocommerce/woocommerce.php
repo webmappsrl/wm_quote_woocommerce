@@ -1275,3 +1275,5 @@ add_action('woocommerce_email', function($wc_emails){
 	add_action('woocommerce_order_status_on-hold_to_pending_notification', array($new_order_email,'trigger'));
 
 },99);
+
+add_filter('woocommerce_email_enabled_new_order','__return_true',99);
