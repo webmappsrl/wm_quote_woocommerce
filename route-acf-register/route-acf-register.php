@@ -1,9 +1,14 @@
 <?php
 
-// DEFINIZIONE DEL DATAMODEL x ROUTE ------------------------------------------------------------------------------------------------
-if( function_exists('acf_add_local_field_group') ):
+add_action('plugins_loaded', function(){
 
-acf_add_local_field_group(array(
+	if ( ! class_exists('WebMapp_Acf') )
+		return;
+
+
+// DEFINIZIONE DEL DATAMODEL x ROUTE ------------------------------------------------------------------------------------------------
+
+$field_group1 =	array(
 	'key' => 'wm_route_quote',
 	'title' => 'Date e preventivo',
 	'fields' => array(
@@ -394,8 +399,7 @@ acf_add_local_field_group(array(
 						'sun' => 'sun',
 					),
 					'allow_custom' => 0,
-					'default_value' => array(
-					),
+					'default_value' => array(),
 					'layout' => 'horizontal',
 					'toggle' => 0,
 					'return_format' => 'value',
@@ -475,127 +479,131 @@ acf_add_local_field_group(array(
 	'hide_on_screen' => '',
 	'active' => true,
 	'description' => '',
-));
+);
 
-endif;
+
 
 // DEFINIZIONE DEL DATAMODEL x BARCHE ------------------------------------------------------------------------------------------------
-if( function_exists('acf_add_local_field_group') ):
+$field_group2 =	array(
+	'key' => 'wm_barche',
+	'title' => 'Barche info',
+	'fields' => array(
+		array(
+			'key' => 'wm_barche_riassunto',
+			'label' => 'Riassunto',
+			'name' => 'riassunto',
+			'type' => 'textarea',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+			'maxlength' => '',
+			'rows' => '',
+			'new_lines' => '',
+		),
+		array(
+			'key' => 'wm_barche_gallery',
+			'label' => 'Gallery',
+			'name' => 'gallery',
+			'type' => 'gallery',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'min' => '',
+			'max' => '',
+			'insert' => 'append',
+			'library' => 'all',
+			'min_width' => '',
+			'min_height' => '',
+			'min_size' => '',
+			'max_width' => '',
+			'max_height' => '',
+			'max_size' => '',
+			'mime_types' => '',
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'barche',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'normal',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+);
 
-	acf_add_local_field_group(array(
-		'key' => 'wm_barche',
-		'title' => 'Barche info',
-		'fields' => array(
-			array(
-				'key' => 'wm_barche_riassunto',
-				'label' => 'Riassunto',
-				'name' => 'riassunto',
-				'type' => 'textarea',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-				'maxlength' => '',
-				'rows' => '',
-				'new_lines' => '',
+
+// DEFINIZIONE DEL DATAMODEL x la data di partenza nel Backend degli Ordini ---------------------------------------------------------------------------------------------------
+
+
+$field_group3 =	array(
+	'key' => 'group_5d63fd404135a',
+	'title' => 'Order departure date',
+	'fields' => array(
+		array(
+			'key' => 'field_5d63fd58692ca',
+			'label' => 'Order departure date',
+			'name' => 'order_departure_date',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => 'order-departure-date',
+				'id' => '',
 			),
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+		),
+	),
+	'location' => array(
+		array(
 			array(
-				'key' => 'wm_barche_gallery',
-				'label' => 'Gallery',
-				'name' => 'gallery',
-				'type' => 'gallery',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'min' => '',
-				'max' => '',
-				'insert' => 'append',
-				'library' => 'all',
-				'min_width' => '',
-				'min_height' => '',
-				'min_size' => '',
-				'max_width' => '',
-				'max_height' => '',
-				'max_size' => '',
-				'mime_types' => '',
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'shop_order',
 			),
 		),
-		'location' => array(
-			array(
-				array(
-					'param' => 'post_type',
-					'operator' => '==',
-					'value' => 'barche',
-				),
-			),
-		),
-		'menu_order' => 0,
-		'position' => 'normal',
-		'style' => 'default',
-		'label_placement' => 'top',
-		'instruction_placement' => 'label',
-		'hide_on_screen' => '',
-		'active' => true,
-		'description' => '',
-	));
+	),
+	'menu_order' => 0,
+	'position' => 'normal',
+	'style' => 'seamless',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+);
+
+
 	
-	endif;
+	new WebMapp_Acf('route',$field_group1);
+	new WebMapp_Acf('barche',$field_group2);
+	new WebMapp_Acf('shop_order',$field_group3);
 
-	// DEFINIZIONE DEL DATAMODEL x la data di partenza nel Backend degli Ordini ---------------------------------------------------------------------------------------------------
-	if( function_exists('acf_add_local_field_group') ):
 
-		acf_add_local_field_group(array(
-			'key' => 'group_5d63fd404135a',
-			'title' => 'Order departure date',
-			'fields' => array(
-				array(
-					'key' => 'field_5d63fd58692ca',
-					'label' => 'Order departure date',
-					'name' => 'order_departure_date',
-					'type' => 'text',
-					'instructions' => '',
-					'required' => 0,
-					'conditional_logic' => 0,
-					'wrapper' => array(
-						'width' => '',
-						'class' => 'order-departure-date',
-						'id' => '',
-					),
-					'default_value' => '',
-					'placeholder' => '',
-					'prepend' => '',
-					'append' => '',
-					'maxlength' => '',
-				),
-			),
-			'location' => array(
-				array(
-					array(
-						'param' => 'post_type',
-						'operator' => '==',
-						'value' => 'shop_order',
-					),
-				),
-			),
-			'menu_order' => 0,
-			'position' => 'normal',
-			'style' => 'seamless',
-			'label_placement' => 'top',
-			'instruction_placement' => 'label',
-			'hide_on_screen' => '',
-			'active' => true,
-			'description' => '',
-		));
-		
-		endif;
+} );
