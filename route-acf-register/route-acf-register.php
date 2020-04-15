@@ -92,12 +92,14 @@ $field_group1 =	array(
 		array(
 			'key' => 'wm_route_quote_season_repeater',
 			'label' => 'Periodi di prezzo (stagionalità)',
+			'wpml_cf_preferences' => WPML_COPY_CUSTOM_FIELD,
 			'name' => 'model_season',
 			'type' => 'repeater',
 			'layout' => 'row',
 			'sub_fields' => array(
 				array(
 					'key' => 'wm_route_quote_model_season_name',
+					'wpml_cf_preferences' => WPML_TRANSLATE_CUSTOM_FIELD,
 					'label' => 'Stagionalità',
 					'name' => 'season_name',
 					'type' => 'text',
@@ -119,6 +121,7 @@ $field_group1 =	array(
 					'sub_fields' => array(
 						array(
 							'key' => 'wm_route_quote_model_season_dates_periods_start',
+							'wpml_cf_preferences' => WPML_COPY_CUSTOM_FIELD,
 							'label' => 'Inizio',
 							'name' => 'start',
 							'type' => 'date_picker',
@@ -137,6 +140,7 @@ $field_group1 =	array(
 						array(
 							'key' => 'wm_route_quote_model_season_dates_periods_stop',
 							'label' => 'Fine periodo',
+							'wpml_cf_preferences' => WPML_COPY_CUSTOM_FIELD,
 							'name' => 'stop',
 							'type' => 'date_picker',
 							'instructions' => '',
