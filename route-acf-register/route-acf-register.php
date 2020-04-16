@@ -37,6 +37,7 @@ $field_group1 =	array(
 			'ui' => 0,
 			'ui_on_text' => '',
 			'ui_off_text' => '',
+			'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 		),
 		// array(
 		// 	'key' => 'wm_route_in_promotion',
@@ -81,6 +82,7 @@ $field_group1 =	array(
 			'min' => 0,
 			'max' => 10,
 			'return_format' => 'id',
+			'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 		),
 		array(
 			'key' => 'wm_route_quote_tab_model_season',
@@ -92,14 +94,14 @@ $field_group1 =	array(
 		array(
 			'key' => 'wm_route_quote_season_repeater',
 			'label' => 'Periodi di prezzo (stagionalità)',
-			'wpml_cf_preferences' => WPML_COPY_CUSTOM_FIELD,
+			'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 			'name' => 'model_season',
 			'type' => 'repeater',
 			'layout' => 'row',
 			'sub_fields' => array(
 				array(
 					'key' => 'wm_route_quote_model_season_name',
-					'wpml_cf_preferences' => WPML_TRANSLATE_CUSTOM_FIELD,
+					'wpml_cf_preferences' => WEBMAPP_TRANSLATE_CUSTOM_FIELD,
 					'label' => 'Stagionalità',
 					'name' => 'season_name',
 					'type' => 'text',
@@ -111,6 +113,7 @@ $field_group1 =	array(
 					'name' => 'season_disactive',
 					'type' => 'true_false',
 					'instructions' => 'Clicca per disattivare questa stagione',
+					'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 				),
 				array(
 					'key' => 'wm_route_quote_model_season_dates_periods_repeater',
@@ -118,10 +121,11 @@ $field_group1 =	array(
 					'name' => 'periods',
 					'type' => 'repeater',
 					'layout' => 'table',
+					'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 					'sub_fields' => array(
 						array(
 							'key' => 'wm_route_quote_model_season_dates_periods_start',
-							'wpml_cf_preferences' => WPML_COPY_CUSTOM_FIELD,
+							'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 							'label' => 'Inizio',
 							'name' => 'start',
 							'type' => 'date_picker',
@@ -140,7 +144,7 @@ $field_group1 =	array(
 						array(
 							'key' => 'wm_route_quote_model_season_dates_periods_stop',
 							'label' => 'Fine periodo',
-							'wpml_cf_preferences' => WPML_COPY_CUSTOM_FIELD,
+							'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 							'name' => 'stop',
 							'type' => 'date_picker',
 							'instructions' => '',
@@ -170,6 +174,7 @@ $field_group1 =	array(
 					'min' => 0,
 					'max' => 10,
 					'return_format' => 'id',
+					'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 				),
 			),
 		),
@@ -326,6 +331,7 @@ $field_group1 =	array(
 			'max' => 0,
 			'layout' => 'table',
 			'button_label' => '',
+			'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 			'sub_fields' => array(
 				array(
 					'key' => 'wm_route_quote_dates_period_name',
@@ -345,6 +351,7 @@ $field_group1 =	array(
 					'prepend' => '',
 					'append' => '',
 					'maxlength' => '',
+					'wpml_cf_preferences' => WEBMAPP_TRANSLATE_CUSTOM_FIELD,
 				),
 				array(
 					'key' => 'wm_route_quote_dates_period_start',
@@ -362,6 +369,7 @@ $field_group1 =	array(
 					'display_format' => 'd/m/Y',
 					'return_format' => 'd/m/Y',
 					'first_day' => 1,
+					'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 				),
 				array(
 					'key' => 'wm_route_quote_dates_period_stop',
@@ -379,6 +387,7 @@ $field_group1 =	array(
 					'display_format' => 'd/m/Y',
 					'return_format' => 'd/m/Y',
 					'first_day' => 1,
+					'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 				),
 				array(
 					'key' => 'wm_route_quote_dates_period_week_days',
@@ -408,6 +417,7 @@ $field_group1 =	array(
 					'toggle' => 0,
 					'return_format' => 'value',
 					'save_custom' => 0,
+					'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 				),
 			),
 		),
@@ -445,6 +455,7 @@ $field_group1 =	array(
 			'max' => 0,
 			'layout' => 'table',
 			'button_label' => 'Aggiuni data',
+			'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 			'sub_fields' => array(
 				array(
 					'key' => 'wm_route_quote_dates_specific',
@@ -462,6 +473,7 @@ $field_group1 =	array(
 					'display_format' => 'd/m/Y',
 					'return_format' => 'd/m/Y',
 					'first_day' => 1,
+					'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 				),
 			),
 		),
@@ -535,6 +547,7 @@ $field_group2 =	array(
 			'max_height' => '',
 			'max_size' => '',
 			'mime_types' => '',
+			'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 		),
 	),
 	'location' => array(
