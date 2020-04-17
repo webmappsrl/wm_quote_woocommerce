@@ -497,7 +497,195 @@ $field_group1 =	array(
 	'description' => '',
 );
 
-
+//ROUTE sezione Flusso pubblicazione
+$group_field_flusso = array(
+		'key' => 'wm_route_flusso_pubblicazione',
+		'title' => 'Flusso pubblicazione',
+		'fields' => array(
+			array(
+				'key' => 'wm_route_priorita_golive',
+				'label' => 'Priorità Golive',
+				'name' => 'priorita_golive',
+				'type' => 'number',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'min' => '',
+				'max' => '',
+				'step' => '',
+				'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
+			),
+			array(
+				'key' => 'wm_route_stato_pubblicazione',
+				'label' => 'stato pubblicazione',
+				'name' => 'stato_pubblicazione',
+				'type' => 'select',
+				'instructions' => '',
+				'required' => 1,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'choices' => array(
+					'new' => 'new',
+					'progress' => 'progress',
+					'seo' => 'seo',
+					'waiting' => 'waiting',
+					'published' => 'published',
+					'pending' => 'pending',
+				),
+				'default_value' => array(
+					0 => 'new',
+				),
+				'allow_null' => 0,
+				'multiple' => 0,
+				'ui' => 0,
+				'return_format' => 'value',
+				'ajax' => 0,
+				'placeholder' => '',
+				'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
+			),
+			array(
+				'key' => 'wm_route_tour_operator',
+				'label' => 'Tour Operator',
+				'name' => 'tour_operator',
+				'type' => 'relationship',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'post_type' => array(
+					0 => 'tour_operator',
+				),
+				'taxonomy' => '',
+				'filters' => array(
+					0 => 'search',
+				),
+				'elements' => '',
+				'min' => 1,
+				'max' => 1,
+				'return_format' => 'id',
+				'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
+			),
+			array(
+				'key' => 'wm_route_description_pdf',
+				'label' => 'Description PDF',
+				'name' => 'description_pdf',
+				'type' => 'file',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'return_format' => 'id',
+				'library' => 'all',
+				'min_size' => '',
+				'max_size' => '',
+				'mime_types' => '',
+			),
+			array(
+				'key' => 'wm_route_pending_notes',
+				'label' => 'Pending Notes',
+				'name' => 'pending_notes',
+				'type' => 'textarea',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'maxlength' => '',
+				'rows' => '',
+				'new_lines' => '',
+				'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
+			),
+			array(
+				'key' => 'wm_route_assegnato_a',
+				'label' => 'Assegnato a',
+				'name' => 'assegnato_a',
+				'type' => 'user',
+				'instructions' => 'Inserisci l\'utente al quale è assegnata la lavorazione',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'role' => '',
+				'allow_null' => 1,
+				'multiple' => 0,
+				'return_format' => 'id',
+				'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
+			),
+			array(
+				'key' => 'wm_route_route_con_track',
+				'label' => 'Route con track',
+				'name' => 'route_con_track',
+				'type' => 'checkbox',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'choices' => array(
+					'si' => 'si',
+					'no' => 'no',
+				),
+				'allow_custom' => 0,
+				'default_value' => array(
+				),
+				'layout' => 'vertical',
+				'toggle' => 0,
+				'return_format' => 'value',
+				'save_custom' => 0,
+				'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'route',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'acf_after_title',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => '',
+		'active' => true,
+		'description' => '',
+	);
+	
 
 // DEFINIZIONE DEL DATAMODEL x BARCHE ------------------------------------------------------------------------------------------------
 $field_group2 =	array(
@@ -619,6 +807,7 @@ $field_group3 =	array(
 
 	
 	new WebMapp_Acf('route',$field_group1);
+	new WebMapp_Acf('route',$group_field_flusso);
 	new WebMapp_Acf('barche',$field_group2);
 	new WebMapp_Acf('shop_order',$field_group3);
 
