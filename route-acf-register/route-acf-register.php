@@ -600,6 +600,7 @@ $group_field_flusso = array(
 				'min_size' => '',
 				'max_size' => '',
 				'mime_types' => '',
+				'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 			),
 			array(
 				'key' => 'wm_route_pending_notes',
