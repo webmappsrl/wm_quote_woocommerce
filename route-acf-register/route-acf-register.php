@@ -572,7 +572,7 @@ $group_field_flusso = array(
 // ROUTE Definizione di Included and Not Included
 $field_group_included = array(
 	'key' => 'wm_route_included_not_included',
-	'title' => 'Included not included',
+	'title' => 'Incluso e Non Incluso',
 	'fields' => array(
 		array(
 			'key' => 'wm_route_ini_activated',
@@ -596,7 +596,7 @@ $field_group_included = array(
 		),
 		array(
 			'key' => 'wm_route_tab_included',
-			'label' => 'Included',
+			'label' => 'Opzioni',
 			'name' => '',
 			'type' => 'tab',
 			'instructions' => '',
