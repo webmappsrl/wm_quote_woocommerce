@@ -821,7 +821,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
             }
                 echo '</div>';
             ?>
-            <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0" border="1" style="border:0px;">
+            <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0" border="1" style="border:0px;width:100%;">
             <?php
             foreach ($rooms as $val2 => $room){
                 ?>
