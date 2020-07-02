@@ -727,7 +727,7 @@ $field_group_included = array(
 		),
 		array(
 			'key' => 'wm_route_ini_support',
-			'label' => 'Assistenza Telefonica 7/7 (in inglese)',
+			'label' => 'Assistenza Telefonica 7/7',
 			'name' => 'ini_support',
 			'type' => 'true_false',
 			'instructions' => '',
