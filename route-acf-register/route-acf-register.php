@@ -425,6 +425,7 @@ $group_field_flusso = array(
 					'waiting' => 'waiting',
 					'published' => 'published',
 					'pending' => 'pending',
+					'done' => 'done'
 				),
 				'default_value' => array(
 					0 => 'new',
