@@ -438,6 +438,23 @@ $group_field_flusso = array(
 				'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
 			),
 			array(
+				'key' => 'wm_route_url_fornitore',
+				'label' => 'URL fornitore',
+				'name' => 'url_fornitore',
+				'type' => 'url',
+				'instructions' => 'Inserire l\'indirizzo web corrispondente al pacchetto sul sito del fornitore',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
+			),
+			array(
 				'key' => 'wm_route_tour_operator',
 				'label' => 'Tour Operator',
 				'name' => 'tour_operator',
