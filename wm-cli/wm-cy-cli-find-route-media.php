@@ -40,14 +40,18 @@ $wm_cy_find_route_media = function( $args, $assoc_args )
 
         $calendar_json = site_url().'/wp-json/wp/v2/media/'.$this_post_thumb_id;
         $featured_image_json = json_decode(file_get_contents($calendar_json),TRUE);
-        foreach ($featured_image_json['wpml_translations'] as $c) {
-            foreach ($c as $d) {
-                if ($d == 'it_IT') {
-                    $featured_image_id_current_lang = $c['id'];
+        if ($featured_image_json['wpml_translations']){
+            foreach ($featured_image_json['wpml_translations'] as $c) {
+                foreach ($c as $d) {
+                    if ($d == 'it_IT') {
+                        $featured_image_id_current_lang = $c['id'];
+                    }
                 }
             }
+            WP_CLI::line( 'ID of featured image in route current language: '.$featured_image_id_current_lang.'');
+        } else {
+            WP_CLI::line( 'No translation present for image ID: '.$this_post_thumb_id.'');
         }
-        WP_CLI::line( 'ID of featured image in route current language: '.$featured_image_id_current_lang.'');
         WP_CLI::line( ' ');
 
     }    
