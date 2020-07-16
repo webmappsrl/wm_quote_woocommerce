@@ -13,3 +13,6 @@ include_once ('wmcli/WebMapp_wm-generate-route-api-cache.php');
 include_once ('woocommerce/woocommerce.php');
 include_once ('woocommerce/preventivi-json.php');
 include_once ('route-acf-register/route-acf-register.php');
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+  require_once dirname( __FILE__ ) . '/wm-cli/wm-cy-cli-find-route-media.php';
+}
