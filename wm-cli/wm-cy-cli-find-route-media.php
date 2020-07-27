@@ -27,7 +27,6 @@ $wm_cy_find_route_media = function( $args, $assoc_args )
         $args = $args;
     }
     foreach ($args as $count => $route_id) {
-        if ($count < 11) {
         //get post language
         $post_lang = apply_filters( 'wpml_post_language_details', NULL, $route_id );
         // WP_CLI::line( 'Route language is: '.$post_lang['language_code'].'');
@@ -73,6 +72,7 @@ $wm_cy_find_route_media = function( $args, $assoc_args )
                         }
                     }
                     if ($mod) {
+                        shell_exec('wp media regenerate '. $featured_image_id_current_lang);
                         set_post_thumbnail( $route_id, $featured_image_id_current_lang );
                         WP_CLI::success( $count.' - '.'Route #'.$route_id.' -> MOD: new image ID: '.$featured_image_id_current_lang );
                     } else {
@@ -88,7 +88,6 @@ $wm_cy_find_route_media = function( $args, $assoc_args )
         } else {
             WP_CLI::warning( $count.' - '.'Route #'.$route_id.' -> NO IMAGE');
         }
-    }    
     }
 
 };
