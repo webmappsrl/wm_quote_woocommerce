@@ -41,11 +41,13 @@ function wm_sync_order_deal_hubspot( $order_get_id ) {
   $order_has_deposit = $order_object->get_meta('_wc_deposits_order_has_deposit', true);
   if ($order_has_deposit === 'yes') {
     $deposit_amount = floatval($order_object->get_meta('_wc_deposits_deposit_amount', true));
+  } else {
+    $deposit_amount = "0";
   }
   
   // Get the issued date
-  $order_issued_date = $order_object->get_date_created();
-  $order_issued_date = date('Y-m-d',$order_issued_date);
+  $order_date = $order_object->order_date;
+  $order_issued_date = date('Y-m-d',strtotime($order_date));
 
   // Get the order total amount and billing name
   $order_total = $order_object->get_total();
@@ -90,21 +92,38 @@ function wm_sync_order_deal_hubspot( $order_get_id ) {
     }
   }
 
-  $CURLOPT_POSTFIELDS = array(
-    "dealname"=> $billing_first_name.' '.$billing_last_name,
-    "dealstage"=> "presentationscheduled",
-    "dealtype"=> "newbusiness",
-    "hubspot_owner_id"=> "40292283",
-    "amount"=> $order_total,
-    "createdate"=> $order_issued_date,
-    "data_di_partenza"=> $departure_date,
-    "descrizione"=> $order_object_id,
-    "nr_adulti"=> $adults_number,
-    "nr_bambini"=> $kids_number,
-    "amount_acconto"=> $deposit_amount,
-    "url_route"=> $routePermalink
-  );
+  // $CURLOPT_POSTFIELDS_ARRAY = array(
+  //   "dealname"=> "$billing_first_name $billing_last_name",
+  //   "dealstage"=> "presentationscheduled",
+  //   "dealtype"=> "newbusiness",
+  //   "hubspot_owner_id"=> "40292283",
+  //   "amount"=> "$order_total",
+  //   "createdate"=> "$order_issued_date",
+  //   "data_di_partenza"=> "$departure_date",
+  //   "descrizione"=> "$order_object_id",
+  //   "nr_adulti"=> "$adults_number",
+  //   "nr_bambini"=> "$kids_number",
+  //   "amount_acconto"=> "$deposit_amount",
+  //   "url_route"=> "$routePermalink"
+  // );
   
+  // $CURLOPT_POSTFIELDS = json_encode($CURLOPT_POSTFIELDS_ARRAY);
+
+  $CURLOPT_POSTFIELDS_ARRAY = "{\"properties\":{
+    \"dealname\": \"$billing_first_name $billing_last_name\",
+    \"dealstage\": \"presentationscheduled\",
+    \"dealtype\": \"newbusiness\",
+    \"hubspot_owner_id\": \"40292283\",
+    \"amount\": \"$order_total\",
+    \"createdate\": \"$order_issued_date\",
+    \"data_di_partenza\": \"$departure_date\",
+    \"descrizione\": \"$order_object_id\",
+    \"nr_adulti\": \"$adults_number\",
+    \"nr_bambini\": \"$kids_number\",
+    \"amount_acconto\": \"$deposit_amount\",
+    \"url_route\": \"$routePermalink\"
+  }}";
+
   $curl = curl_init();
 
   curl_setopt_array($curl, array(
@@ -115,7 +134,7 @@ function wm_sync_order_deal_hubspot( $order_get_id ) {
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => $CURLOPT_POSTFIELDS,
+    CURLOPT_POSTFIELDS => $CURLOPT_POSTFIELDS_ARRAY,
     CURLOPT_HTTPHEADER => array(
       "accept: application/json",
       "content-type: application/json"
