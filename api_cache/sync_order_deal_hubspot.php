@@ -1,18 +1,4 @@
 <?php
-// {
-//   "dealname": "Pedram Katanchi 4",
-//   "dealstage": "presentationscheduled",
-//   "dealtype": "newbusiness",
-//   "hubspot_owner_id": "40292283",
-//   "amount": "2555",
-//   "createdate": "2020-08-07",
-//   "data_di_partenza": "2020-12-07",
-//   "descrizione": "#85493",
-//   "nr_adulti": "3",
-//   "nr_bambini": "2",
-//   "amount_acconto": "550",
-//   "url_route": "https://cyclando.com/route/lago-di-costanza-per-famiglie/"
-// }
 
 add_action( 'woocommerce_thankyou', 'wm_sync_order_deal_hubspot', 10, 1 ); 
 
@@ -91,23 +77,6 @@ function wm_sync_order_deal_hubspot( $order_get_id ) {
       }
     }
   }
-
-  // $CURLOPT_POSTFIELDS_ARRAY = array(
-  //   "dealname"=> "$billing_first_name $billing_last_name",
-  //   "dealstage"=> "presentationscheduled",
-  //   "dealtype"=> "newbusiness",
-  //   "hubspot_owner_id"=> "40292283",
-  //   "amount"=> "$order_total",
-  //   "createdate"=> "$order_issued_date",
-  //   "data_di_partenza"=> "$departure_date",
-  //   "descrizione"=> "$order_object_id",
-  //   "nr_adulti"=> "$adults_number",
-  //   "nr_bambini"=> "$kids_number",
-  //   "amount_acconto"=> "$deposit_amount",
-  //   "url_route"=> "$routePermalink"
-  // );
-  
-  // $CURLOPT_POSTFIELDS = json_encode($CURLOPT_POSTFIELDS_ARRAY);
 
   $CURLOPT_POSTFIELDS_ARRAY = "{\"properties\":{
     \"dealname\": \"$billing_first_name $billing_last_name\",

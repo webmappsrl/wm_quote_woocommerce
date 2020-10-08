@@ -1,6 +1,6 @@
 <?php
 
-# Register a custom 'foo' command to output a supplied positional param.
+# Gets routes ID seperated by space and outputs the original featured image ID and its translations
 #
 # $ wp foo bar --append=qux
 # Success: bar qux
