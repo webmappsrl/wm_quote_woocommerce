@@ -419,13 +419,11 @@ $group_field_flusso = array(
 					'id' => '',
 				),
 				'choices' => array(
-					'new' => 'new',
-					'progress' => 'progress',
-					'seo' => 'seo',
-					'waiting' => 'waiting',
-					'published' => 'published',
-					'pending' => 'pending',
-					'done' => 'done'
+					'new' => 'New',
+					'seo' => 'SEO',
+					'pending' => 'Pending',
+					'done' => 'Done',
+					'done21' => 'Done 21',
 				),
 				'default_value' => array(
 					0 => 'new',

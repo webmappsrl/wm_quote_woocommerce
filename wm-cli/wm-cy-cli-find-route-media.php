@@ -43,6 +43,9 @@ $wm_cy_find_route_media = function( $args, $assoc_args )
         $this_post_thumb_id = get_post_thumbnail_id( $route_id );
         // WP_CLI::line( 'Route featured image ID: '.$this_post_thumb_id.'');
 
+        // Generate post featured image sizes
+        shell_exec('wp media regenerate '. $this_post_thumb_id);
+
         //get route image language
         $image_lang = apply_filters( 'wpml_post_language_details', NULL, $this_post_thumb_id );
         if (is_array($image_lang)){
