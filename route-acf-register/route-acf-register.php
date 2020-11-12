@@ -638,7 +638,8 @@ $field_group_included = array(
 		),
 		array(
 			'key' => 'wm_route_ini_insurance',
-			'label' => 'Assicurazione EuropAssistance medico bagaglio 24/24',
+			'label' => 'Assicurazione medico bagaglio 24/24 (solo cittadini italiani)',
+			'label_eng' => 'Travel/Medical Insurance 24/24 (Italian cityzens only)',
 			'name' => 'ini_insurance',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -660,6 +661,7 @@ $field_group_included = array(
 		array(
 			'key' => 'wm_route_ini_bandb',
 			'label' => 'Pernottamento e prima colazione',
+			'label_eng' => 'Overnight stay and breakfast',
 			'name' => 'ini_bandb',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -681,6 +683,7 @@ $field_group_included = array(
 		array(
 			'key' => 'wm_route_ini_gps',
 			'label' => 'Tracce GPS',
+			'label_eng' => 'GPS Tracks',
 			'name' => 'ini_gps',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -702,6 +705,7 @@ $field_group_included = array(
 		array(
 			'key' => 'wm_route_ini_app',
 			'label' => 'APP',
+			'label_eng' => 'APP',
 			'name' => 'ini_app',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -723,6 +727,7 @@ $field_group_included = array(
 		array(
 			'key' => 'wm_route_ini_luggage',
 			'label' => 'Trasporto bagagli da hotel a hotel durante il tour',
+			'label_eng' => 'Luggage transfer',
 			'name' => 'ini_luggage',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -744,6 +749,7 @@ $field_group_included = array(
 		array(
 			'key' => 'wm_route_ini_support',
 			'label' => 'Assistenza Telefonica 7/7',
+			'label_eng' => 'Telephone support 7/7',
 			'name' => 'ini_support',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -765,6 +771,7 @@ $field_group_included = array(
 		array(
 			'key' => 'wm_route_ini_transfer',
 			'label' => 'Transfer qualora non specificati ne "La quota include"',
+			'label_eng' => 'Transfers not listed as "Included"',
 			'name' => 'ini_transfer',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -786,6 +793,7 @@ $field_group_included = array(
 		array(
 			'key' => 'wm_route_ini_taxes',
 			'label' => 'Tasse di soggiorno',
+			'label_eng' => 'City tax',
 			'name' => 'ini_taxes',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -807,6 +815,7 @@ $field_group_included = array(
 		array(
 			'key' => 'wm_route_ini_tip',
 			'label' => 'Mance',
+			'label_eng' => 'Tips',
 			'name' => 'ini_tip',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -827,7 +836,8 @@ $field_group_included = array(
 		),
 		array(
 			'key' => 'wm_route_ini_trip',
-			'label' => 'Viaggio a/r dall\'Italia',
+			'label' => 'Viaggio a/r dal punto di partenza',
+			'label_eng' => 'Journey to/from the starting point of the tour',
 			'name' => 'ini_trip',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -849,6 +859,7 @@ $field_group_included = array(
 		array(
 			'key' => 'wm_route_ini_meal',
 			'label' => 'Pasti e bevande non specificati ne "La quota include"',
+			'label_eng' => 'Meals and drinks not listed as "Included"',
 			'name' => 'ini_meal',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -870,6 +881,7 @@ $field_group_included = array(
 		array(
 			'key' => 'wm_route_ini_bike',
 			'label' => 'Noleggio bicicletta',
+			'label_eng' => 'Bike rental',
 			'name' => 'ini_bike',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -891,6 +903,7 @@ $field_group_included = array(
 		array(
 			'key' => 'wm_route_ini_extra',
 			'label' => 'Extra in genere',
+			'label_eng' => 'Extras',
 			'name' => 'ini_extra',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -912,6 +925,7 @@ $field_group_included = array(
 		array(
 			'key' => 'wm_route_ini_ticket',
 			'label' => 'Ingressi, traghetti e quanto non espressamente indicato ne "La quota include"',
+			'label_eng' => 'Entrance fees, ferries and anything not listed as "Included"',
 			'name' => 'ini_ticket',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -933,6 +947,7 @@ $field_group_included = array(
 		array(
 			'key' => 'wm_route_ini_briefing',
 			'label' => 'Briefing di benvenuto',
+			'label_eng' => 'Welcome briefing',
 			'name' => 'ini_briefing',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -954,6 +969,7 @@ $field_group_included = array(
 		array(
 			'key' => 'wm_route_ini_route_description',
 			'label' => 'Descrizione dettagliata del percorso con mappe',
+			'label_eng' => 'Detailed description and maps of the itinerary',
 			'name' => 'ini_route_description',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -974,7 +990,7 @@ $field_group_included = array(
 		),
 		array(
 			'key' => 'wm_route_ini_included_aditional_repeater',
-			'label' => 'Campo libero Incluso',
+			'label' => 'Campi liberi Inclusi',
 			'name' => 'ini_included_aditional_repeater',
 			'type' => 'repeater',
 			'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
@@ -994,7 +1010,7 @@ $field_group_included = array(
 			'sub_fields' => array(
 				array(
 					'key' => 'wm_route_ini_included_aditional',
-					'label' => 'Campo libero',
+					'label' => 'Campo libero IT',
 					'name' => 'ini_included_aditional',
 					'type' => 'text',
 					'instructions' => '',
@@ -1005,13 +1021,34 @@ $field_group_included = array(
 						'class' => '',
 						'id' => '',
 					),
-					'wpml_cf_preferences' => 0,
+					'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
+					'acfe_permissions' => '',
 					'default_value' => '',
 					'placeholder' => '',
 					'prepend' => '',
 					'append' => '',
 					'maxlength' => '',
+				),
+				array(
+					'key' => 'wm_route_ini_included_aditional_en',
+					'label' => 'Campo libero EN',
+					'name' => 'ini_included_aditional_en',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
 					'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
+					'acfe_permissions' => '',
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
 				),
 			),
 		),
@@ -1037,7 +1074,7 @@ $field_group_included = array(
 			'sub_fields' => array(
 				array(
 					'key' => 'wm_route_ini_not_included_aditional',
-					'label' => 'Campo libero',
+					'label' => 'Campo libero IT',
 					'name' => 'ini_not_included_aditional',
 					'type' => 'text',
 					'instructions' => '',
@@ -1054,7 +1091,27 @@ $field_group_included = array(
 					'prepend' => '',
 					'append' => '',
 					'maxlength' => '',
+				),
+				array(
+					'key' => 'wm_route_ini_not_included_aditional_en',
+					'label' => 'Campo libero EN',
+					'name' => 'ini_not_included_aditional_en',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
 					'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
+					'acfe_permissions' => '',
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
 				),
 			),
 		),
