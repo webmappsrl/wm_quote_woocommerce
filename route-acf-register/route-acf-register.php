@@ -384,6 +384,27 @@ $group_field_flusso = array(
 		'title' => 'Flusso pubblicazione',
 		'fields' => array(
 			array(
+				'key' => 'wm_route_non_in_ricerca',
+				'label' => 'Escludi dalla Ricerca',
+				'name' => 'non_in_ricerca',
+				'type' => 'true_false',
+				'instructions' => 'Seleziona questo checkbox se questa route non deve apparire nella pagina Cerca',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'message' => '',
+				'default_value' => 0,
+				'ui' => 0,
+				'wpml_cf_preferences' => 1,
+				'ui_on_text' => '',
+				'ui_off_text' => '',
+				'wpml_cf_preferences' => WEBMAPP_COPY_CUSTOM_FIELD,
+			),
+			array(
 				'key' => 'wm_route_priorita_golive',
 				'label' => 'Priorità Golive',
 				'name' => 'priorita_golive',
