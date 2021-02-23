@@ -451,6 +451,7 @@ $group_field_flusso = array(
 					'pending' => 'Pending',
 					'done' => 'Done',
 					'done21' => 'Done 21',
+					'donedone21' => 'Done done 21',
 				),
 				'default_value' => array(
 					0 => 'new',
