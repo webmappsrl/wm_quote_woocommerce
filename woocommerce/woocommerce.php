@@ -148,10 +148,34 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 		// }
 	}
 
+	add_filter('add_to_cart_redirect', 'wm_add_to_cart_redirect');
+	function wm_add_to_cart_redirect() {
+	 global $woocommerce;
+	 $wm_redirect_checkout = $woocommerce->cart->get_checkout_url();
+	 return $wm_redirect_checkout;
+	}
 
 
+	add_filter('woocommerce_after_checkout_form', 'wm_woocommerce_after_checkout_form');
+	function wm_woocommerce_after_checkout_form() {
+	 ?>
+	 <script>
+	 (function($) {
+		$(document).ready(function() {
+			if (Cookies.get('oc_participants_cookie')) {
+				var ocCookies = JSON.parse(Cookies.get('oc_participants_cookie'));
+				console.log('Siamo in checkout page At the end')
+				console.log(ocCookies)
+				// jQuery('#billing_first_name').
+			}
+		});
+	})(jQuery);
+	 </script>
+	 <?php
+	}
 
 
+	
 
 /**
  * Invoke class private method
@@ -181,7 +205,7 @@ function woo_hack_invoke_private_method( $class_name, $methodName ) {
 
 
 /** Add a custom% surcharge to your cart / checkout * change the $percentage to set the surcharge to a value to suit ***************/
-add_action( 'woocommerce_cart_calculate_fees','woocommerce_custom_surcharge' );
+//add_action( 'woocommerce_cart_calculate_fees','woocommerce_custom_surcharge' );
 function woocommerce_custom_surcharge() {
 	if ( is_admin() && ! defined( 'DOING_AJAX' ) )
         return;
@@ -203,7 +227,7 @@ function woocommerce_custom_surcharge() {
 /**
  * Display field value of departure date on the order edit page
  */
-add_action( 'woocommerce_admin_order_data_after_billing_address', 'my_custom_checkout_field_display_admin_order_meta', 10, 1 );
+//add_action( 'woocommerce_admin_order_data_after_billing_address', 'my_custom_checkout_field_display_admin_order_meta', 10, 1 );
 function my_custom_checkout_field_display_admin_order_meta( $order ){
 	$order_id = method_exists( $order, 'get_id' ) ? $order->get_id() : $order->id;
 	$coupon = $order->get_used_coupons();
@@ -319,25 +343,25 @@ add_filter( 'woocommerce_cart_totals_coupon_html', 'change_remove', 10, 3);
 
 
 /** FIX AMOUNT OF CART **/
-add_filter('woocommerce_deposits_cart_deposit_amount', function($deposit_amount, $cart_total){
+// add_filter('woocommerce_deposits_cart_deposit_amount', function($deposit_amount, $cart_total){
    
-    $deposit_percentage = get_option('wc_deposits_checkout_mode_deposit_amount');
-    $insurance = WC()->session->get('wp_quote_insurance');
-    // var_dump($insurance);
-    if ( $deposit_percentage && $insurance )
-    {
-        $insurance_percentage = $insurance * ($deposit_percentage/100);
-        $deposit_amount = $deposit_amount - $insurance_percentage;
-        $deposit_amount = $deposit_amount + $insurance;
+//     $deposit_percentage = get_option('wc_deposits_checkout_mode_deposit_amount');
+//     $insurance = WC()->session->get('wp_quote_insurance');
+//     // var_dump($insurance);
+//     if ( $deposit_percentage && $insurance )
+//     {
+//         $insurance_percentage = $insurance * ($deposit_percentage/100);
+//         $deposit_amount = $deposit_amount - $insurance_percentage;
+//         $deposit_amount = $deposit_amount + $insurance;
 
-        WC()->session->set('vn_deposit_amount',$deposit_amount);
-    }
-return $deposit_amount;
+//         WC()->session->set('vn_deposit_amount',$deposit_amount);
+//     }
+// return $deposit_amount;
 
-}, 99 ,2);
+// }, 99 ,2);
 
 // adds the deposit amount to cart page after total number
-add_action( 'woocommerce_cart_totals_before_order_total','show_deposit_amount' );
+//add_action( 'woocommerce_cart_totals_before_order_total','show_deposit_amount' );
 function show_deposit_amount() {
 	$deposit_to_pay = WC()->session->get('vn_deposit_amount') ;
 	$deposit_to_pay_formated = number_format($deposit_to_pay, 2);
@@ -429,7 +453,7 @@ function bbloomer_add_checkout_privacy_policy() {
    
 }
 // Save custom checkout field value as custom order meta data and user meta data too
-add_action( 'woocommerce_checkout_create_order', 'custom_checkout_field_update_order_meta', 20, 2 );
+//add_action( 'woocommerce_checkout_create_order', 'custom_checkout_field_update_order_meta', 20, 2 );
 function custom_checkout_field_update_order_meta( $order, $data ) {
     if ( isset( $_POST['newsletter_acceptance'] ) ) {
         // Save custom checkout field value
@@ -477,7 +501,7 @@ function bbloomer_not_approved_privacy() {
 function vn_register_meta_box_order_admin() {
     add_meta_box( 'vn_order_quote_details', __( 'Rooms detail', 'wm-child-verdenatura' ), 'vn_order_admin_metabox_callback', 'shop_order', 'normal', 'high' );
 }
-add_action( 'add_meta_boxes', 'vn_register_meta_box_order_admin' );
+//add_action( 'add_meta_boxes', 'vn_register_meta_box_order_admin' );
  
 /**
  * Meta box display callback.
@@ -719,7 +743,7 @@ function vn_order_admin_metabox_callback( $post ) {
 
 //  Email to customer with rooms details --------------------------------------------------------------------------------
 
-add_action( 'woocommerce_email_before_order_table', 'ts_email_before_order_table', 10, 4 );
+//add_action( 'woocommerce_email_before_order_table', 'ts_email_before_order_table', 10, 4 );
 function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $email ) {
 	// $coupon = $order->get_used_coupons();
 	// $coupon_name = $coupon['0'];
@@ -964,7 +988,7 @@ function ts_email_before_order_table( $order, $sent_to_admin, $plain_text, $emai
 }
 
 // change cart item (products) name in frontend - carrello -
-add_action( 'woocommerce_before_calculate_totals', 'custom_cart_items_prices', 10, 1 );
+//add_action( 'woocommerce_before_calculate_totals', 'custom_cart_items_prices', 10, 1 );
 function custom_cart_items_prices( $cart ) {
 	// $order = new WC_Order($post->ID);
 	// $coupon = $order->get_used_coupons();
@@ -1215,7 +1239,7 @@ function product_type_selector_filter_callback() {
 // add return to form preventivi (calcolatore) button on cart page
 // add ID to proceed to checkout in cart page 
 remove_action( 'woocommerce_proceed_to_checkout','woocommerce_button_proceed_to_checkout', 20);
-add_action('woocommerce_proceed_to_checkout','add_back_to_form_quotes', 20);
+//add_action('woocommerce_proceed_to_checkout','add_back_to_form_quotes', 20);
 function add_back_to_form_quotes(){
 	if (isset($_GET['lang'])){
 		$page_langauge = $_GET['lang'];
@@ -1249,7 +1273,7 @@ function add_back_to_form_quotes(){
 }
 
 /* Add to the functions.php file of your theme */
-add_filter( 'woocommerce_order_button_text', 'woo_custom_order_button_text' ); 
+//add_filter( 'woocommerce_order_button_text', 'woo_custom_order_button_text' ); 
 
 function woo_custom_order_button_text() {
     return __( 'Contact Cyclando', 'wm-child-verdenatura' ); 
