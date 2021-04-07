@@ -166,7 +166,18 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 				var ocCookies = JSON.parse(Cookies.get('oc_participants_cookie'));
 				console.log('Siamo in checkout page At the end')
 				console.log(ocCookies)
-				// jQuery('#billing_first_name').
+				jQuery('#billing_first_name').val(ocCookies['billingname'])
+				jQuery('#billing_last_name').val(ocCookies['billingsurname'])
+				jQuery('#billing_email').val(ocCookies['billingemail'])
+				if (ocCookies['billingnewsletter'] == 'on') {
+					jQuery('#newsletter_acceptance').prop('checked', true);
+				}
+				if (ocCookies['billingprivacy'] == 'on') {
+					jQuery('#privacy_policy').prop('checked', true);
+				}
+				if (ocCookies['billingconditions'] == 'on') {
+					jQuery('#terms_conditions').prop('checked', true);
+				}
 			}
 		});
 	})(jQuery);
