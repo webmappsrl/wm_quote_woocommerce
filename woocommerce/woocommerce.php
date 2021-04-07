@@ -165,14 +165,14 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 			if (Cookies.get('oc_participants_cookie')) {
 				var ocCookies = JSON.parse(Cookies.get('oc_participants_cookie'));
 				console.log(ocCookies)
-				$('#billing_first_name').val(ocCookies['billingname'])
-				$('#billing_last_name').val(ocCookies['billingsurname'])
-				$('#billing_email').val(ocCookies['billingemail'])
+				$('#billing_first_name').val(ocCookies['billingname']);
+				$('#billing_last_name').val(ocCookies['billingsurname']);
+				$('#billing_email').val(ocCookies['billingemail']);
+				$('#privacy_policy').prop('checked', true);
+				$('#terms_conditions').prop('checked', true);
 				if (ocCookies['billingnewsletter'] == 'on') {
 					$('#newsletter_acceptance').prop('checked', true);
 				}
-				$('#privacy_policy').prop('checked', true);
-				$('#terms_conditions').prop('checked', true);
 			}
 		});
 	})(jQuery);
