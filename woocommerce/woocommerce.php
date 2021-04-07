@@ -31,10 +31,10 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 		WC()->session->__unset('vn_deposit_amount');
     }	
 
-	$add_to_cart = $_REQUEST['add-to-cart'];
-	if (preg_match('/,/',$_REQUEST['add-to-cart'])) { // checks if there are more than 1 product variation
+	$add_to_cart = rawurldecode($_REQUEST['add-to-cart']);
+	if (preg_match('/,/',$add_to_cart)) { // checks if there are more than 1 product variation
 
-		$product_ids = explode( ',', $_REQUEST['add-to-cart'] );
+		$product_ids = explode( ',', $add_to_cart );
 		$count       = count( $product_ids );
 		$number      = 0;
 
@@ -48,7 +48,7 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 	
 			if ( ++$number === $count ) {
 				// Ok, final item, let's send it back to woocommerce's add_to_cart_action method for handling.
-				$_REQUEST['add-to-cart'] = $product_id;
+				$add_to_cart = $product_id;
 				
 	
 	
@@ -87,7 +87,7 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 		
 		// Check for quantities defined in curie notation (<product_id>:<product_quantity>)
 		// https://dsgnwrks.pro/snippets/woocommerce-allow-adding-multiple-products-to-the-cart-via-the-add-to-cart-query-string/#comment-12236
-		$id_and_quantity = explode( ':', $_REQUEST['add-to-cart'] );
+		$id_and_quantity = explode( ':', $add_to_cart );
 		$product_id = $id_and_quantity[0];
 
 		$_REQUEST['quantity'] = ! empty( $id_and_quantity[1] ) ? absint( $id_and_quantity[1] ) : 1;
@@ -96,7 +96,7 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 		$number      = 0;
 		if ( ++$number === $count ) {
 			// Ok, final item, let's send it back to woocommerce's add_to_cart_action method for handling.
-			$_REQUEST['add-to-cart'] = $product_id;
+			$add_to_cart = $product_id;
 			
 
 
@@ -139,7 +139,7 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 		// 	wp_redirect( home_url() .$variable_to_send );
 
 		function custom_add_to_cart_redirect() { 
-			if( isset( $_REQUEST['add-to-cart'] ) && $_GET['lang'] == 'en') {
+			if( isset( $add_to_cart ) && $_GET['lang'] == 'en') {
 			return 'https://cyclando.com/your-order/?lang=en'; 
 			}
 		}
