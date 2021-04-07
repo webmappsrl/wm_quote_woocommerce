@@ -48,7 +48,7 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 	
 			if ( ++$number === $count ) {
 				// Ok, final item, let's send it back to woocommerce's add_to_cart_action method for handling.
-				$add_to_cart = $product_id;
+				$_REQUEST['add-to-cart'] = $product_id;
 				
 	
 	
@@ -96,7 +96,7 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 		$number      = 0;
 		if ( ++$number === $count ) {
 			// Ok, final item, let's send it back to woocommerce's add_to_cart_action method for handling.
-			$add_to_cart = $product_id;
+			$_REQUEST['add-to-cart'] = $product_id;
 			
 
 
@@ -139,7 +139,7 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 		// 	wp_redirect( home_url() .$variable_to_send );
 
 		function custom_add_to_cart_redirect() { 
-			if( isset( $add_to_cart ) && $_GET['lang'] == 'en') {
+			if( isset( $_REQUEST['add-to-cart'] ) && $_GET['lang'] == 'en') {
 			return 'https://cyclando.com/your-order/?lang=en'; 
 			}
 		}
