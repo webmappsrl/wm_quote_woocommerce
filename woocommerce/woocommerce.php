@@ -163,7 +163,6 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 		jQuery(document).ready(function() {
 			if (Cookies.get('oc_participants_cookie')) {
 				var ocCookies = JSON.parse(Cookies.get('oc_participants_cookie'));
-				console.log(ocCookies);
 
 				jQuery('#billing_first_name').val(ocCookies['billingname']);
 				jQuery('#billing_last_name').val(ocCookies['billingsurname']);
@@ -173,17 +172,14 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 				setTimeout(function() {
                 
 					if (ocCookies['billingprivacy'] == 'on' && jQuery('#privacy_policy').prop("checked") == false) {
-						console.log('dentro policy');
 						// jQuery('#privacy_policy').trigger( "click" );
 						jQuery('#privacy_policy').prop('checked', true);
 					}
 					if (ocCookies['billingconditions'] == 'on' && jQuery('#terms_conditions').prop("checked") == false) {
-						console.log('dentro terms_conditions');
 						// jQuery('#terms_conditions').trigger( "click" );
 						jQuery('#terms_conditions').prop('checked', true);
 					}
 					if (ocCookies['billingnewsletter'] == 'on' && jQuery('#newsletter_acceptance').prop("checked") == false) {
-						console.log('dentro newsletter_acceptance');
 						// jQuery('#newsletter_acceptance').trigger( "click" );
 						jQuery('#newsletter_acceptance').prop('checked', true);
 					}
