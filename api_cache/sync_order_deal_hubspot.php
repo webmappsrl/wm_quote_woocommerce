@@ -1,108 +1,82 @@
 <?php
 
-add_action( 'woocommerce_thankyou', 'wm_sync_order_deal_hubspot', 10, 1 ); 
+add_action( 'woocommerce_thankyou', 'wm_ajax_update_deal_hubspot', 20, 1 ); 
 
-function wm_sync_order_deal_hubspot( $order_get_id ) { 
+function wm_ajax_update_deal_hubspot( $order_get_id ) { 
+  ?>
+  <script type="text/javascript">
+    jQuery(document).ready(function(){
+      var res; 
+        // ajax on route purchase / pay button that creates a new hubspot deal 
+        function ajaxUpdateHubspotDeal(){
+            var ocCookies = ocmCheckCookie();
+            var data = {
+                'action': 'oc_ajax_update_hs_deal',
+                'orderid':  <?= $order_get_id ?>,
+                'cookies':  ocCookies,
+            };
+            jQuery.ajax({
+                url: '/wp-admin/admin-ajax.php',
+                type : 'post',
+                data: data,
+                beforeSend: function(){
+                },
+                success : function( response ) {
+                },
+                complete:function(response){
+                    obj = JSON.parse(response.responseText);
+                    res = JSON.parse(obj);
+                    console.log(res);
+                }
+            });
+        }
+        ajaxUpdateHubspotDeal();
+    })
+    
+  </script>
+  <?php
+
+}
+
+// action that process ajax call : webmapp_anypost-cy_route_advancedsearch-oneclick.php to update HS Deals after payment
+add_action( 'wp_ajax_nopriv_oc_ajax_update_hs_deal', 'oc_ajax_update_hs_deal' );
+add_action( 'wp_ajax_oc_ajax_update_hs_deal', 'oc_ajax_update_hs_deal' );
+function oc_ajax_update_hs_deal(){
+    $cookies = $_POST['cookies'];
+    $order_id = $_POST['orderid']; 
+    $result =  wm_sync_update_deal_hubspot($cookies,$order_id);    
+    
+    echo json_encode($result);
+    wp_die();
+}
+
+function wm_sync_update_deal_hubspot( $cookies,$order_id ) { 
   //Hubspot APIKEY location => wp-config.php
   $hapikey = HUBSPOTAPIKEY;
 
-  //Get WC order obj
-  $order = wc_get_order($order_get_id);
-
-  // Check if the order has deposit (Parent) or is a single order with no deposit attached to it
-  $order_parent_id = $order->get_parent_id();
-  if ($order_parent_id) {
-    $order_parent = new WC_Order($order_parent_id);
-  }
-  if ($order_parent) {
-    $order_object = $order_parent;
+  $hsdealid = $cookies['hsdealid'];
+  $hs_status = '';
+  if ($cookies['deposit'] && $cookies['deposit'] > 0) {
+    // identifier for Acconto Pagato
+    $hs_status = '2051528';
   } else {
-    $order_object = $order;
+    // identifier for Saldo Pagato
+    $hs_status = 'contractsent';
   }
-
-  // Get the order_object ID
-  $order_object_id = $order_object->get_id();
-
-  // Get the deposit amount
-  $order_has_deposit = $order_object->get_meta('_wc_deposits_order_has_deposit', true);
-  if ($order_has_deposit === 'yes') {
-    $deposit_amount = floatval($order_object->get_meta('_wc_deposits_deposit_amount', true));
-  } else {
-    $deposit_amount = "0";
-  }
-  
-  // Get the issued date
-  $order_date = $order_object->order_date;
-  $order_issued_date = date('Y-m-d',strtotime($order_date));
-
-  // Get the order total amount and billing name
-  $order_total = $order_object->get_total();
-  $billing_first_name = $order_object->get_billing_first_name();
-  $billing_last_name = $order_object->get_billing_last_name();
-
-  // Get the order coupon to extract the json 
-  $coupon = $order_object->get_coupon_codes();
-	$coupon_name = $coupon['0'];
-	$coupon_obj = get_posts( array( 
-		'name' => $coupon_name, 
-		'post_type' => 'shop_coupon'
-	) );
-	foreach ( $coupon_obj as $info) {
-		$description = $info->post_excerpt;
-	}
-	$desc = json_decode($description, JSON_PRETTY_PRINT);
-  foreach ($desc as $val => $key){
-    if ($val == 'routeId') { 
-      $routeid = $key;
-      $routName = get_the_title($routeid);
-      $routePermalink = get_permalink($routeid);
-    } 
-    if ($val == 'departureDate') {
-      $date = $key;
-      $departure_date = date("Y-m-d", strtotime($date));
-    }
-    if ($val == 'rooms') {
-      $rooms = $key;
-      $adults_number = 0;
-      $kids_number = 0;
-      foreach ($rooms as $val2 => $room){
-        foreach ($room as $val3 => $pax){
-          $pax_type = $pax['type'];
-          if ($pax_type == '0') {
-            $adults_number ++;
-          } else {
-            $kids_number ++;
-          }
-        }
-      }
-    }
-  }
-
   $CURLOPT_POSTFIELDS_ARRAY = "{\"properties\":{
-    \"dealname\": \"$billing_first_name $billing_last_name\",
-    \"dealstage\": \"presentationscheduled\",
-    \"dealtype\": \"newbusiness\",
-    \"hubspot_owner_id\": \"40292283\",
-    \"amount\": \"$order_total\",
-    \"createdate\": \"$order_issued_date\",
-    \"data_di_partenza\": \"$departure_date\",
-    \"descrizione\": \"$order_object_id\",
-    \"nr_adulti\": \"$adults_number\",
-    \"nr_bambini\": \"$kids_number\",
-    \"amount_acconto\": \"$deposit_amount\",
-    \"url_route\": \"$routePermalink\"
+    \"dealstage\": \"$hs_status\"
   }}";
 
   $curl = curl_init();
 
   curl_setopt_array($curl, array(
-    CURLOPT_URL => "https://api.hubapi.com/crm/v3/objects/deals?hapikey=$hapikey",
+    CURLOPT_URL => "https://api.hubapi.com/crm/v3/objects/deals/$hsdealid?hapikey=$hapikey",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
     CURLOPT_MAXREDIRS => 10,
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_CUSTOMREQUEST => "PATCH",
     CURLOPT_POSTFIELDS => $CURLOPT_POSTFIELDS_ARRAY,
     CURLOPT_HTTPHEADER => array(
       "accept: application/json",
@@ -114,5 +88,10 @@ function wm_sync_order_deal_hubspot( $order_get_id ) {
   $err = curl_error($curl);
 
   curl_close($curl);
+  if ($err) {
+    return "cURL Error #:" . $err;
+  } else {
+    return $response;
+  }
 }; 
 
