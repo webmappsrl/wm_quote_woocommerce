@@ -58,10 +58,10 @@ function wm_sync_update_deal_hubspot( $cookies,$order_id ) {
   $hs_status = '';
   if ($cookies['deposit'] && $cookies['deposit'] > 0) {
     // identifier for Acconto Pagato
-    $hs_status = '2051528';
+    $hs_status = 'contractsent';
   } else {
     // identifier for Saldo Pagato
-    $hs_status = 'contractsent';
+    $hs_status = '2051528';
   }
   $CURLOPT_POSTFIELDS_ARRAY = "{\"properties\":{
     \"dealstage\": \"$hs_status\"
