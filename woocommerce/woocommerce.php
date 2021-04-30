@@ -140,20 +140,31 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 
 		function custom_add_to_cart_redirect() { 
 			if( isset( $_REQUEST['add-to-cart'] ) && $_GET['lang'] == 'en') {
-			return 'https://cyclando.com/your-order/?lang=en'; 
+				return get_home_url().'/en/your-order'; 
+			}
+			if( isset( $_REQUEST['add-to-cart'] ) && $_GET['lang'] == 'it') {
+				return get_home_url().'/il-tuo-ordine'; 
 			}
 		}
 		add_filter( 'woocommerce_add_to_cart_redirect', 'custom_add_to_cart_redirect' );
 		// apply_filters( 'woocommerce_get_cart_url', wc_get_page_permalink( 'your-order/?lang=en' ) );
 		// }
-	}
 
+	}
 	add_filter('add_to_cart_redirect', 'wm_add_to_cart_redirect');
 	function wm_add_to_cart_redirect() {
-	 global $woocommerce;
-	 $wm_redirect_checkout = $woocommerce->cart->get_checkout_url();
-	 return $wm_redirect_checkout;
+	// global $woocommerce;
+	// $wm_redirect_checkout = $woocommerce->cart->get_checkout_url();
+	//  return $wm_redirect_checkout;
+	if( isset( $_REQUEST['add-to-cart'] ) && $_GET['lang'] == 'en') {
+		return get_home_url().'/en/payment';
 	}
+	if( isset( $_REQUEST['add-to-cart'] ) && $_GET['lang'] == 'it') {
+		return get_home_url().'/pagamento';
+	}
+	}
+
+	
 
 
 	add_filter('woocommerce_after_checkout_form', 'wm_woocommerce_after_checkout_form');
