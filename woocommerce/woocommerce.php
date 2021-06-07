@@ -150,18 +150,25 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 		// apply_filters( 'woocommerce_get_cart_url', wc_get_page_permalink( 'your-order/?lang=en' ) );
 		// }
 
+		// if( isset( $_REQUEST['add-to-cart'] ) && $_GET['lang'] == 'en') {
+		// 	add_filter( 'woocommerce_get_checkout_url', get_home_url().'/en/payment' );
+		// }
+		// if( isset( $_REQUEST['add-to-cart'] ) && $_GET['lang'] == 'it') {
+		// 	add_filter( 'woocommerce_get_checkout_url', get_home_url().'/pagamento' );
+		// }
 	}
+	
 	add_filter('add_to_cart_redirect', 'wm_add_to_cart_redirect');
 	function wm_add_to_cart_redirect() {
-	// global $woocommerce;
-	// $wm_redirect_checkout = $woocommerce->cart->get_checkout_url();
-	//  return $wm_redirect_checkout;
-	if( isset( $_REQUEST['add-to-cart'] ) && $_GET['lang'] == 'en') {
-		return get_home_url().'/en/payment';
-	}
-	if( isset( $_REQUEST['add-to-cart'] ) && $_GET['lang'] == 'it') {
-		return get_home_url().'/pagamento';
-	}
+		// global $woocommerce;
+		// $wm_redirect_checkout = $woocommerce->cart->get_checkout_url();
+		//  return $wm_redirect_checkout;
+		if( isset( $_REQUEST['add-to-cart'] ) && $_GET['lang'] == 'en') {
+			return get_home_url().'/en/payment';
+		}
+		if( isset( $_REQUEST['add-to-cart'] ) && $_GET['lang'] == 'it') {
+			return get_home_url().'/pagamento';
+		}
 	}
 
 	
@@ -1328,3 +1335,13 @@ add_action('woocommerce_email', function($wc_emails){
 },99);
 
 add_filter('woocommerce_email_enabled_new_order','__return_true',99);
+
+
+add_action( 'woocommerce_review_order_after_submit', 'wm_go_back_btn_after_place_order', 10 );
+    
+function wm_go_back_btn_after_place_order() { 
+	?>
+		<div class="checkout-go-back-btn"></div>
+		<script src="/wp-content/plugins/wm_quote_woocommerce/woocommerce/checkout.js"></script>
+	<?php
+}
