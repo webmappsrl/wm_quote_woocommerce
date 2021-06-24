@@ -89,8 +89,12 @@ function wm_sync_update_deal_hubspot( $cookies,$order_id ) {
 
   curl_close($curl);
   if ($err) {
+    $err_log = $hsdealid . '->' . $hs_status . ' = ' . $err;
+    wm_write_log_file($err_log,'a+','dealHS_update_success');
     return "cURL Error #:" . $err;
   } else {
+    $response_log = $hsdealid . '->' . $hs_status . ' = ' . $response;
+    wm_write_log_file($response_log,'a+','dealHS_update_error');
     return $response;
   }
 }; 
