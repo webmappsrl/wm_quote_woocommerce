@@ -14,7 +14,7 @@
 $wm_product_remove = function( $args, $assoc_args )
 {
     $the_query = array(
-        'posts_per_page'   => 100,
+        'posts_per_page'   => 200,
         'post_type'        => 'product',
         'fields' => 'ids'
     );
