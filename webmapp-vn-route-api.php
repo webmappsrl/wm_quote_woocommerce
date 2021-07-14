@@ -18,4 +18,5 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
   require_once dirname( __FILE__ ) . '/wm-cli/wm-cy-cli-find-route-media.php';
   require_once dirname( __FILE__ ) . '/wm-cli/wm-cy-update-route-null-price-to-max.php';
   require_once dirname( __FILE__ ) . '/wm-cli/product-variation.php';
+  require_once dirname( __FILE__ ) . '/wm-cli/products-remove.php';
 }
