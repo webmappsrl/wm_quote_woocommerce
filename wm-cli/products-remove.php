@@ -16,7 +16,10 @@ $wm_product_remove = function( $args, $assoc_args )
     $the_query = array(
         'posts_per_page'   => 200,
         'post_type'        => 'product',
-        'fields' => 'ids'
+        'fields'           => 'ids',
+        'date_query' => array(
+            'before' => date('Y-m-d', strtotime('-1 days')) 
+        )
     );
     $args = get_posts($the_query);
     foreach ($args as $count => $product_id) {
