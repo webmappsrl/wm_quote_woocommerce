@@ -31,7 +31,7 @@ $wm_product_remove = function( $args, $assoc_args )
         $product = wc_get_product( $product_id );
         if ( preg_match('/^[0-9]*$/',$product->get_name())) {
             WP_CLI::line( $product->get_name(). ' deleting');
-            shell_exec('wp post delete '. $product_id. ' --force');
+            shell_exec($count . ' - wp post delete '. $product_id. ' --force');
         }
     }
 };
