@@ -23,7 +23,9 @@ function woocommerce_add_multiple_products_to_cart( $url = false ) {
 		WC()->cart->add_discount( $_GET['coupon'] );
 	}
 
-	session_start();
+	if( ! session_id() ) {
+		session_start();
+	}
 
     if( ! is_admin() && isset($_GET['insurance']) ) {
         $_SESSION['wp_quote_insurance'] = $_GET['insurance'];

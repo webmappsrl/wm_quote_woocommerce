@@ -452,6 +452,8 @@ $group_field_flusso = array(
 					'done' => 'Done',
 					'done21' => 'Done 21',
 					'donedone21' => 'Done done 21',
+					'done22' => 'Done 22',
+					'donedone22' => 'Done done 22',
 				),
 				'default_value' => array(
 					0 => 'new',
