@@ -54,6 +54,7 @@ function wm_sync_update_deal_hubspot( $cookies,$order_id ) {
   //Hubspot APIKEY location => wp-config.php
   $hapikey = HUBSPOTAPIKEY;
 
+  $order_close_date = date('Y-m-d');
   $hsdealid = $cookies['hsdealid'];
   $hs_status = '';
   if ($cookies['deposit'] && $cookies['deposit'] > 0) {
@@ -64,7 +65,8 @@ function wm_sync_update_deal_hubspot( $cookies,$order_id ) {
     $hs_status = '2051528';
   }
   $CURLOPT_POSTFIELDS_ARRAY = "{\"properties\":{
-    \"dealstage\": \"$hs_status\"
+    \"dealstage\": \"$hs_status\",
+    \"closedate\": \"$order_close_date\"
   }}";
 
   $curl = curl_init();
