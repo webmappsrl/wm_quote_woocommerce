@@ -668,8 +668,8 @@ $field_group_included = array(
 		),
 		array(
 			'key' => 'wm_route_ini_insurance',
-			'label' => 'Assicurazione medico bagaglio 24/24 (solo cittadini italiani)',
-			'label_eng' => 'Travel/Medical Insurance 24/24 (Italian cityzens only)',
+			'label' => 'Assicurazione medico bagaglio 24/24',
+			'label_eng' => 'Travel/Medical Insurance 24/24',
 			'name' => 'ini_insurance',
 			'type' => 'true_false',
 			'instructions' => '',
