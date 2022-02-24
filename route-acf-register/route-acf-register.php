@@ -778,8 +778,8 @@ $field_group_included = array(
 		),
 		array(
 			'key' => 'wm_route_ini_support',
-			'label' => 'Assistenza Telefonica 7/7',
-			'label_eng' => 'Telephone support 7/7',
+			'label' => 'Assistenza Telefonica locale 7/7',
+			'label_eng' => 'Local telephone assistance 7/7',
 			'name' => 'ini_support',
 			'type' => 'true_false',
 			'instructions' => '',
